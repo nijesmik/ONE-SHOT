@@ -4,8 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oneshot.model.dao.OrderDao">
 	<insert id="registOrder" parameterType="Order">
-		INSERT INTO oneshot.order (user_id, order_url, order_list, total_price, service)
-		VALUES (#{userId}, #{orderUrl}, #{orderList}, #{totalPrice}, #{service})
+		INSERT INTO oneshot.order (user_id, order_url)
+		VALUES (#{userId}, #{orderUrl})
 	</insert>
 	
 </mapper>

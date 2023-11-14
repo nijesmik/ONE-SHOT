@@ -7,8 +7,6 @@ public class Brand {
     private int id;
     private String brandName;
     private String brandUrl;
-    private int crawling;
-    private int service;
     private String createdTime;
     private String updatedTime;
 
@@ -39,22 +37,6 @@ public class Brand {
         this.brandUrl = brandUrl;
     }
 
-    public int getCrawling() {
-        return crawling;
-    }
-
-    public void setCrawling(int crawling) {
-        this.crawling = crawling;
-    }
-
-    public int getService() {
-        return service;
-    }
-
-    public void setService(int service) {
-        this.service = service;
-    }
-
     public String getCreatedTime() {
         return createdTime;
     }
@@ -73,8 +55,8 @@ public class Brand {
 
     @Override
     public String toString() {
-        return "Brand [id=" + id + ", brandName=" + brandName + ", brandUrl=" + brandUrl + ", crawling=" + crawling
-                + ", service=" + service + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+        return "Brand [id=" + id + ", brandName=" + brandName + ", brandUrl=" + brandUrl + ", createdTime="
+                + createdTime + ", updatedTime=" + updatedTime + "]";
     }
 
 }

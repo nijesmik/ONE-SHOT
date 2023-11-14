@@ -9,19 +9,16 @@ public class User {
     private String password;
     private String nickName;
     private int admin;
-    private int service;
     private String createdTime;
     private String updatedTime;
 
     public User() {
     }
 
-    public User(String userEmail, String password, String nickName, int admin, int service) {
+    public User(String userEmail, String password, String nickName) {
         this.userEmail = userEmail;
         this.password = password;
         this.nickName = nickName;
-        this.admin = admin;
-        this.service = service;
     }
 
     public int getId() {
@@ -64,14 +61,6 @@ public class User {
         this.admin = admin;
     }
 
-    public int getService() {
-        return service;
-    }
-
-    public void setService(int service) {
-        this.service = service;
-    }
-
     public String getCreatedTime() {
         return createdTime;
     }
@@ -91,8 +80,7 @@ public class User {
     @Override
     public String toString() {
         return "User [id=" + id + ", userEmail=" + userEmail + ", password=" + password + ", nickName=" + nickName
-                + ", admin=" + admin + ", service=" + service + ", createdTime=" + createdTime + ", updatedTime="
-                + updatedTime + "]";
+                + ", admin=" + admin + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
     }
 
 }

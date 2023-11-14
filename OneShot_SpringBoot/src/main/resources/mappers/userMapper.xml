@@ -10,7 +10,6 @@
 	  <result column="password" property="password"/>
 	  <result column="nick_name" property="nickName"/>
 	  <result column="admin" property="admin"/>
-	  <result column="service" property="service"/>
 	  <result column="created_time" property="createdTime"/>
 	  <result column="updated_time" property="updatedTime"/>
 	</resultMap>
@@ -22,8 +21,8 @@
     </select>
 
 	<insert id="insertUser" parameterType="User">
-		INSERT INTO user(user_email, password, nick_name, admin, service)
-		VALUES (#{userEmail}, #{password}, #{nickName}, #{admin}, #{service})
+		INSERT INTO user(user_email, password, nick_name)
+		VALUES (#{userEmail}, #{password}, #{nickName})
 	</insert>
 	
 </mapper>
