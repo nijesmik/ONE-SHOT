@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SsafitProjectSpringApplication {
+public class OneShotSpringApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SsafitProjectSpringApplication.class, args);
+        SpringApplication.run(OneShotSpringApplication.class, args);
     }
 
 }
