@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModel;
 @ApiModel(value = "유저 모델", description = "유저 정보")
 public class User {
     private int id;
-    private String userCode;
     private String userEmail;
     private String password;
     private String nickName;
@@ -17,8 +16,7 @@ public class User {
     public User() {
     }
 
-    public User(String userCode, String userEmail, String password, String nickName, int admin, int service) {
-        this.userCode = userCode;
+    public User(String userEmail, String password, String nickName, int admin, int service) {
         this.userEmail = userEmail;
         this.password = password;
         this.nickName = nickName;
@@ -32,14 +30,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
     }
 
     public String getUserEmail() {
@@ -100,9 +90,9 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", userCode=" + userCode + ", userEmail=" + userEmail + ", password=" + password
-                + ", nickName=" + nickName + ", admin=" + admin + ", service=" + service + ", createdTime="
-                + createdTime + ", updatedTime=" + updatedTime + "]";
+        return "User [id=" + id + ", userEmail=" + userEmail + ", password=" + password + ", nickName=" + nickName
+                + ", admin=" + admin + ", service=" + service + ", createdTime=" + createdTime + ", updatedTime="
+                + updatedTime + "]";
     }
 
 }

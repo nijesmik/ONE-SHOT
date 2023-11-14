@@ -45,9 +45,6 @@ public class UserRestController {
     @PostMapping("/signup")
     @ApiOperation(value = "유저 회원가입", notes = "유저를 등록한다")
     public ResponseEntity<?> signup(User user) {
-        // TODO userCode 생성 알고리즘 구상하기
-        String userCode = "userCode";
-        user.setUserCode(userCode);
         int result = userService.signup(user);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
