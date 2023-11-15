@@ -19,4 +19,9 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.registOrder(order);
     }
 
+    @Override
+    public int urlCheck(String url) {
+        return orderDao.checkUrl(url);
+    }
+
 }

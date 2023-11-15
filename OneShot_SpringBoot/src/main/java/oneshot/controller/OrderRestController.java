@@ -1,5 +1,7 @@
 package oneshot.controller;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +38,26 @@ public class OrderRestController {
         Order order = new Order();
         order.setUserId(loginUser.getId());
 
-        // TODO url 생성 알고리즘 설계
-        order.setOrderUrl("http://localhost:8080/oneshot/orderurltest");
+        String orderUrl = "http://localhost:8080/oneshot/order/";
+        while (true) {
+            Random rnd = new Random();
+            StringBuffer buf = new StringBuffer();
+
+            for (int i = 0; i < 10; i++) {
+                if (rnd.nextBoolean()) {
+                    buf.append((char) ((int) (rnd.nextInt(26)) + 97));
+                } else {
+                    buf.append((rnd.nextInt(10)));
+                }
+            }
+            String randomUrl = buf.toString();
+            int check = orderService.urlCheck(orderUrl + randomUrl);
+            if (check < 1) {
+                orderUrl += randomUrl;
+                order.setOrderUrl(orderUrl);
+                break;
+            }
+        }
 
         int result = orderService.regist(order);
         if (result == 0) {

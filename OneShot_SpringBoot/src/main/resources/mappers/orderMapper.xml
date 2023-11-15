@@ -8,4 +8,10 @@
 		VALUES (#{userId}, #{orderUrl})
 	</insert>
 	
+    <select id="checkUrl" parameterType="String" resultType="int">
+        SELECT COUNT(*) AS CNT
+        FROM oneshot.order
+        WHERE order_url = #{orderUrl}
+    </select>
+	
 </mapper>
