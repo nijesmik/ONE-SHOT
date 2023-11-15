@@ -10,10 +10,7 @@ public class Menu {
     private String menuName;
     private int price;
     private String size;
-    private String capacity;
-    private String calorie;
     private String type;
-    private int service;
     private String createdTime;
     private String updatedTime;
 
@@ -68,36 +65,12 @@ public class Menu {
         this.size = size;
     }
 
-    public String getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(String capacity) {
-        this.capacity = capacity;
-    }
-
-    public String getCalorie() {
-        return calorie;
-    }
-
-    public void setCalorie(String calorie) {
-        this.calorie = calorie;
-    }
-
     public String getType() {
         return type;
     }
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public int getService() {
-        return service;
-    }
-
-    public void setService(int service) {
-        this.service = service;
     }
 
     public String getCreatedTime() {
@@ -119,8 +92,8 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu [id=" + id + ", menuCode=" + menuCode + ", brandId=" + brandId + ", menuName=" + menuName
-                + ", price=" + price + ", size=" + size + ", capacity=" + capacity + ", calorie=" + calorie + ", type="
-                + type + ", service=" + service + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+                + ", price=" + price + ", size=" + size + ", type=" + type + ", createdTime=" + createdTime
+                + ", updatedTime=" + updatedTime + "]";
     }
 
 }
