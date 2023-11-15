@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import oneshot.model.dao.OrderDao;
 import oneshot.model.dto.Order;
+import oneshot.model.dto.OrderDetail;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -21,7 +22,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int urlCheck(String url) {
-        return orderDao.checkUrl(url);
+        return orderDao.urlCheck(url);
+    }
+
+    @Transactional
+    @Override
+    public int addOrderDetail(OrderDetail orderDetail) {
+        return orderDao.addOrderDetail(orderDetail);
     }
 
 }
