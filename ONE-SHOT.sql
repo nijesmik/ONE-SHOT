@@ -15,8 +15,9 @@ CREATE TABLE IF NOT EXISTS `user` ( -- 유저 정보를 저장하는 테이블
 INSERT INTO user
 (user_email, password, nick_name, admin)
 VALUES
-("ssafy@ssafy.com", "1234", "비회원", 0),
-("junghoon1039@gmail.com", "1234", "관리자", 1)
+("ssafy@ssafy.com", "0000", "비회원", 0),
+("junghoon1039@gmail.com", "000123", "관리자", 1),
+("kim@ssafy.com", "1234", "김싸피", 0)
 ;
 
 CREATE TABLE IF NOT EXISTS `brand` ( -- 브랜드 정보를 저장하는 테이블
@@ -27,19 +28,36 @@ CREATE TABLE IF NOT EXISTS `brand` ( -- 브랜드 정보를 저장하는 테이�
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 브랜드 row 수정 시각'
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+INSERT INTO brand
+(brand_name, brand_url)
+VALUES
+("스타벅스", "https://www.starbucks.co.kr"),
+("메머드커피", "https://www.mmthcoffee.com/")
+;
+
 CREATE TABLE IF NOT EXISTS `menu` ( -- 메뉴 정보를 저장하는 테이블 | 브랜드에 귀속
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '메뉴 기본 PK',
   `menu_code` VARCHAR(256) NOT NULL COMMENT '메뉴 번호',
   `brand_id` INT NOT NULL COMMENT '메뉴가 속한 브랜드의 id',
   `menu_name` VARCHAR(256) NOT NULL COMMENT '메뉴 이름',
   `price` INT NOT NULL COMMENT '메뉴 가격',
-  `size` VARCHAR(256) COMMENT '메뉴 사이즈',
-  `type` ENUM ('COLD', 'HOT', 'BOTH', 'ELSE') DEFAULT 'BOTH' COMMENT '메뉴 타입 : COLD : 차가운 음료만 가능 | HOT : 뜨거운 음료만 가능 | BOTH : 둘다 가능 | ELSE : 기타',
+  `size` VARCHAR(256) NOT NULL COMMENT '메뉴 사이즈',
+  `type` ENUM ('COLD', 'HOT', 'ELSE') NOT NULL COMMENT '메뉴 타입 : COLD : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 메뉴 row 수정 시각',
   UNIQUE KEY (`menu_code`, `brand_id`), -- 브랜드id, 메뉴코드 복합 유니크 | 브랜드가 다른경우 동일 메뉴코드 가능
   CONSTRAINT `fk_menu_brand_id` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`) -- 브랜드id 외래키
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
+
+INSERT INTO menu
+(menu_code, brand_id, menu_name, price, size, type)
+VALUES
+("star0001", "1", "아이스 카페 아메리카노", "3000", "tall 355ml", "COLD"),
+("star0002", "1", "아이스 카페 아메리카노", "3500", "grande 472ml", "COLD"),
+("star0003", "1", "카페 아메리카노", "3500", "grande 472ml", "HOT"),
+("star0004", "1", "카페라떼", "4000", "grande 472ml", "HOT"),
+("mmtc0001", "2", "아메리카노", "1600", "M 20oz", "COLD")
+;
 
 CREATE TABLE IF NOT EXISTS `order` ( -- 개별 주문의 종합 결과 주문서 정보 테이블 | 유저에게 귀속
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '주문서 기본 PK',
