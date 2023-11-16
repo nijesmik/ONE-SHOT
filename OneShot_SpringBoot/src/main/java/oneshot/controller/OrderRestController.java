@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import oneshot.model.dto.Order;
-import oneshot.model.dto.OrderDetail;
 import oneshot.model.dto.User;
 import oneshot.model.service.OrderService;
 
@@ -61,16 +60,6 @@ public class OrderRestController {
         }
 
         int result = orderService.regist(order);
-        if (result == 0) {
-            return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/detail/add")
-    @ApiOperation(value = "주문 추가", notes = "새로운 주문을 추가한다")
-    public ResponseEntity<?> addOrderDetail(OrderDetail orderDetail) {
-        int result = orderService.addOrderDetail(orderDetail);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }

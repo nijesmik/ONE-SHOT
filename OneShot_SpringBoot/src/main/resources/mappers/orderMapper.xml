@@ -13,11 +13,5 @@
         FROM oneshot.order
         WHERE order_url = #{orderUrl}
     </select>
-    
-    <insert id="addOrderDetail" parameterType="OrderDetail">
-        INSERT INTO order_detail
-        (order_id, menu_id, order_user, amount)
-        VALUES (#{orderId}, #{menuId}, #{orderUser}, #{amount})
-    </insert>
 	
 </mapper>
