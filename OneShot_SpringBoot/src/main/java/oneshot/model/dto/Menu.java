@@ -9,6 +9,7 @@ public class Menu {
     private String menuName;
     private int price;
     private String size;
+    private String temperature;
     private String type;
     private String createdTime;
     private String updatedTime;
@@ -56,6 +57,14 @@ public class Menu {
         this.size = size;
     }
 
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
+    }
+
     public String getType() {
         return type;
     }
@@ -83,8 +92,8 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu [menuId=" + menuId + ", brandId=" + brandId + ", menuName=" + menuName + ", price=" + price
-                + ", size=" + size + ", type=" + type + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
-                + "]";
+                + ", size=" + size + ", temperature=" + temperature + ", type=" + type + ", createdTime=" + createdTime
+                + ", updatedTime=" + updatedTime + "]";
     }
 
 }
