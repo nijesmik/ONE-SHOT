@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 
 @ApiModel(value = "주문서 모델", description = "주문서 정보")
 public class Order {
-    private int id;
+    private int orderId;
     private int userId;
     private String orderUrl;
     private int service;
@@ -14,12 +14,12 @@ public class Order {
     public Order() {
     }
 
-    public int getId() {
-        return id;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public int getUserId() {
@@ -64,7 +64,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order [id=" + id + ", userId=" + userId + ", orderUrl=" + orderUrl + ", service=" + service
+        return "Order [orderId=" + orderId + ", userId=" + userId + ", orderUrl=" + orderUrl + ", service=" + service
                 + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
     }
 

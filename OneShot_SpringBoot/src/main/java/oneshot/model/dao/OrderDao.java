@@ -3,7 +3,7 @@ package oneshot.model.dao;
 import oneshot.model.dto.Order;
 
 public interface OrderDao {
-    int registOrder(Order order);
+    int createOrder(Order order);
 
-    int checkUrl(String url);
+    int urlCheck(String url);
 }

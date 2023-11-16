@@ -15,13 +15,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public int regist(Order order) {
-        return orderDao.registOrder(order);
+    public int createOrder(Order order) {
+        return orderDao.createOrder(order);
     }
 
     @Override
     public int urlCheck(String url) {
-        return orderDao.checkUrl(url);
+        return orderDao.urlCheck(url);
     }
 
 }

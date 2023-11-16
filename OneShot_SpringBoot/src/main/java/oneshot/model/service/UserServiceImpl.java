@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(User user) {
-        User tmp = userDao.selectOne(user.getUserEmail());
+        User tmp = userDao.login(user.getEmail());
         if (tmp != null && tmp.getPassword().equals(user.getPassword()))
             return tmp;
         return null;
@@ -24,6 +24,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public int signup(User user) {
-        return userDao.insertUser(user);
+        return userDao.signup(user);
     }
 }
