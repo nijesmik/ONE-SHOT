@@ -29,7 +29,7 @@ public class OrderRestController {
 
     @PostMapping("/create")
     @ApiOperation(value = "주문서 생성", notes = "새로운 주문서 정보를 생성한다")
-    public ResponseEntity<?> regist(HttpSession session) {
+    public ResponseEntity<?> createOrder(HttpSession session) {
         Object userObject = session.getAttribute("loginUser");
         if (userObject == null || userObject == "") {
             return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
@@ -38,7 +38,7 @@ public class OrderRestController {
         Order order = new Order();
         order.setUserId(loginUser.getUserId());
 
-        String orderUrl = "http://localhost:8080/oneshot/order/";
+        String randomUrl = "";
         while (true) {
             Random rnd = new Random();
             StringBuffer buf = new StringBuffer();
@@ -50,20 +50,19 @@ public class OrderRestController {
                     buf.append((rnd.nextInt(10)));
                 }
             }
-            String randomUrl = buf.toString();
-            int check = orderService.urlCheck(orderUrl + randomUrl);
+            randomUrl = buf.toString();
+            int check = orderService.urlCheck(randomUrl);
             if (check < 1) {
-                orderUrl += randomUrl;
-                order.setOrderUrl(orderUrl);
+                order.setOrderUrl(randomUrl);
                 break;
             }
         }
 
-        int result = orderService.regist(order);
+        int result = orderService.createOrder(order);
         if (result == 0) {
-            return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
+        return new ResponseEntity<String>(randomUrl, HttpStatus.CREATED);
     }
 
 }
