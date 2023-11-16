@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `menu` ( -- 메뉴 정보를 저장하는 테이블 |
   `img` VARCHAR(255) NOT NULL COMMENT '메뉴 이미지',
   `price` INT NOT NULL COMMENT '메뉴 가격',
   `size` VARCHAR(255) NOT NULL COMMENT '메뉴 사이즈',
-  `temperature` ENUM ('COLD', 'HOT', 'ELSE') NOT NULL COMMENT '음료 온도 : COLD : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
+  `temperature` ENUM ('ICE', 'HOT', 'ELSE') NOT NULL COMMENT '음료 온도 : ICE : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
   `type` ENUM ('COFFEE', 'DECAFFEINE', 'ELSE') NOT NULL COMMENT '메뉴 타입 : COFFEE : 커피 | DECAFFEINE : 디카페인 | ELSE : 기타',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 메뉴 row 수정 시각',
@@ -53,11 +53,11 @@ CREATE TABLE IF NOT EXISTS `menu` ( -- 메뉴 정보를 저장하는 테이블 |
 INSERT INTO menu
 (brand_id, menu_name, img, price, size, temperature, type)
 VALUES
-("1", "아이스 카페 아메리카노", "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[110563]_20210426095937808.jpg", "3000", "tall 355ml", "COLD", "COFFEE"),
-("1", "아이스 카페 아메리카노", "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[110563]_20210426095937808.jpg", "3500", "grande 472ml", "COLD", "COFFEE"),
+("1", "아이스 카페 아메리카노", "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[110563]_20210426095937808.jpg", "3000", "tall 355ml", "ICE", "COFFEE"),
+("1", "아이스 카페 아메리카노", "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[110563]_20210426095937808.jpg", "3500", "grande 472ml", "ICE", "COFFEE"),
 ("1", "카페 아메리카노", "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[94]_20210430103337006.jpg", "3500", "grande 472ml", "HOT", "COFFEE"),
 ("1", "카페라떼", "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[41]_20210415133833725.jpg", "4000", "grande 472ml", "HOT", "COFFEE"),
-("2", "깔라만시에이드", "https://www.mmthcoffee.com/files/menu/c77ff17d91b29c1e79f8536764dcc8b0.png", "3000", "M 20oz", "COLD", "ELSE")
+("2", "깔라만시에이드", "https://www.mmthcoffee.com/files/menu/c77ff17d91b29c1e79f8536764dcc8b0.png", "3000", "M 20oz", "ICE", "ELSE")
 ;
 
 CREATE TABLE IF NOT EXISTS `order` ( -- 개별 주문의 종합 결과 주문서 정보 테이블 | 유저에게 귀속
