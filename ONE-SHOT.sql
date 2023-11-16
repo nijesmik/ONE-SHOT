@@ -37,15 +37,14 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS `menu` ( -- 메뉴 정보를 저장하는 테이블 | 브랜드에 귀속
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '메뉴 기본 PK',
-  `menu_code` VARCHAR(255) NOT NULL COMMENT '메뉴 번호',
   `brand_id` INT NOT NULL COMMENT '메뉴가 속한 브랜드의 id',
   `menu_name` VARCHAR(255) NOT NULL COMMENT '메뉴 이름',
   `price` INT NOT NULL COMMENT '메뉴 가격',
   `size` VARCHAR(255) NOT NULL COMMENT '메뉴 사이즈',
-  `type` ENUM ('COLD', 'HOT', 'ELSE') NOT NULL COMMENT '메뉴 타입 : COLD : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
+  `temperature` ENUM ('COLD', 'HOT', 'ELSE') NOT NULL COMMENT '음료 온도 : COLD : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
+  `type` ENUM ('COFFEE', 'DECAFFEINE', 'ELSE') NOT NULL COMMENT '메뉴 타입 : COFFEE : 커피 | DECAFFEINE : 디카페인 | ELSE : 기타',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 메뉴 row 수정 시각',
-  UNIQUE KEY (`menu_code`, `brand_id`), -- 브랜드id, 메뉴코드 복합 유니크 | 브랜드가 다른경우 동일 메뉴코드 가능
   CONSTRAINT `fk_menu_brand_id` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`) -- 브랜드id 외래키
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
