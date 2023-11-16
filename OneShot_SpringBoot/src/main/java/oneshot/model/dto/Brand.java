@@ -4,8 +4,9 @@ import io.swagger.annotations.ApiModel;
 
 @ApiModel(value = "브랜드 모델", description = "브랜드 정보")
 public class Brand {
-    private int id;
+    private int brandId;
     private String brandName;
+    private String logo;
     private String brandUrl;
     private String createdTime;
     private String updatedTime;
@@ -13,12 +14,12 @@ public class Brand {
     public Brand() {
     }
 
-    public int getId() {
-        return id;
+    public int getBrandId() {
+        return brandId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
     }
 
     public String getBrandName() {
@@ -27,6 +28,14 @@ public class Brand {
 
     public void setBrandName(String brandName) {
         this.brandName = brandName;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public String getBrandUrl() {
@@ -55,8 +64,8 @@ public class Brand {
 
     @Override
     public String toString() {
-        return "Brand [id=" + id + ", brandName=" + brandName + ", brandUrl=" + brandUrl + ", createdTime="
-                + createdTime + ", updatedTime=" + updatedTime + "]";
+        return "Brand [brandId=" + brandId + ", brandName=" + brandName + ", logo=" + logo + ", brandUrl=" + brandUrl
+                + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
     }
 
 }

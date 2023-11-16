@@ -37,7 +37,7 @@ public class OrderRestController {
         }
         User loginUser = (User) userObject;
         Order order = new Order();
-        order.setUserId(loginUser.getId());
+        order.setUserId(loginUser.getUserId());
 
         String orderUrl = "http://localhost:8080/oneshot/order/";
         while (true) {

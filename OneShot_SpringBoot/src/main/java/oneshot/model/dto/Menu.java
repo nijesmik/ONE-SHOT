@@ -4,8 +4,7 @@ import io.swagger.annotations.ApiModel;
 
 @ApiModel(value = "메뉴 모델", description = "메뉴 정보")
 public class Menu {
-    private int id;
-    private String menuCode;
+    private int menuId;
     private int brandId;
     private String menuName;
     private int price;
@@ -17,20 +16,12 @@ public class Menu {
     public Menu() {
     }
 
-    public int getId() {
-        return id;
+    public int getMenuId() {
+        return menuId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getMenuCode() {
-        return menuCode;
-    }
-
-    public void setMenuCode(String menuCode) {
-        this.menuCode = menuCode;
+    public void setMenuId(int menuId) {
+        this.menuId = menuId;
     }
 
     public int getBrandId() {
@@ -91,9 +82,9 @@ public class Menu {
 
     @Override
     public String toString() {
-        return "Menu [id=" + id + ", menuCode=" + menuCode + ", brandId=" + brandId + ", menuName=" + menuName
-                + ", price=" + price + ", size=" + size + ", type=" + type + ", createdTime=" + createdTime
-                + ", updatedTime=" + updatedTime + "]";
+        return "Menu [menuId=" + menuId + ", brandId=" + brandId + ", menuName=" + menuName + ", price=" + price
+                + ", size=" + size + ", type=" + type + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+                + "]";
     }
 
 }
