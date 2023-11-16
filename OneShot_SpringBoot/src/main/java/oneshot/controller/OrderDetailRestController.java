@@ -21,7 +21,7 @@ public class OrderDetailRestController {
     @Autowired
     private OrderDetailService orderDetailService;
 
-    @PostMapping("/detail/add")
+    @PostMapping("/create")
     @ApiOperation(value = "주문 추가", notes = "새로운 주문을 추가한다")
     public ResponseEntity<?> addOrderDetail(OrderDetail orderDetail) {
         int result = orderDetailService.addOrderDetail(orderDetail);

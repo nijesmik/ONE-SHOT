@@ -27,7 +27,7 @@ public class OrderRestController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("/regist")
+    @PostMapping("/create")
     @ApiOperation(value = "주문서 생성", notes = "새로운 주문서 정보를 생성한다")
     public ResponseEntity<?> regist(HttpSession session) {
         Object userObject = session.getAttribute("loginUser");
