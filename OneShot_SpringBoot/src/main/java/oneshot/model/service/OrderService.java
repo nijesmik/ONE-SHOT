@@ -1,10 +1,10 @@
 package oneshot.model.service;
 
 import oneshot.model.dto.Order;
+import oneshot.model.dto.User;
 
 public interface OrderService {
-    int createOrder(Order order);
+    int createOrder(User user, String url);
 
-    int urlCheck(String url);
-
+    String generateRandomUrl();
 }

@@ -14,6 +14,11 @@ public class Order {
     public Order() {
     }
 
+    public Order(int userId, String orderUrl) {
+        this.userId = userId;
+        this.orderUrl = orderUrl;
+    }
+
     public int getOrderId() {
         return orderId;
     }

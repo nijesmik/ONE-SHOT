@@ -34,31 +34,8 @@ public class OrderRestController {
         if (userObject == null || userObject == "") {
             return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
         }
-        User loginUser = (User) userObject;
-        Order order = new Order();
-        order.setUserId(loginUser.getUserId());
-
-        String randomUrl = "";
-        while (true) {
-            Random rnd = new Random();
-            StringBuffer buf = new StringBuffer();
-
-            for (int i = 0; i < 10; i++) {
-                if (rnd.nextBoolean()) {
-                    buf.append((char) ((int) (rnd.nextInt(26)) + 97));
-                } else {
-                    buf.append((rnd.nextInt(10)));
-                }
-            }
-            randomUrl = buf.toString();
-            int check = orderService.urlCheck(randomUrl);
-            if (check < 1) {
-                order.setOrderUrl(randomUrl);
-                break;
-            }
-        }
-
-        int result = orderService.createOrder(order);
+        String randomUrl = orderService.generateRandomUrl();
+        int result = orderService.createOrder((User) userObject, randomUrl);
         if (result == 0) {
             return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
