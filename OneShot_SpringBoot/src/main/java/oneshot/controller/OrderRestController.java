@@ -21,7 +21,7 @@ import oneshot.model.service.OrderService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/oneshot/order")
+@RequestMapping("/api/order")
 @Api(tags = "주문서 컨트롤러")
 public class OrderRestController {
 

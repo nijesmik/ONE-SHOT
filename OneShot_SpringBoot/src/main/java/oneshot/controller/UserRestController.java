@@ -18,7 +18,7 @@ import oneshot.model.service.UserService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/oneshot/user")
+@RequestMapping("/api/user")
 @Api(tags = "유저 컨트롤러")
 public class UserRestController {
 
