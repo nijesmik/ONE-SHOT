@@ -15,8 +15,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     @Transactional
     @Override
-    public int addOrderDetail(OrderDetail orderDetail) {
-        return orderDetailDao.addOrderDetail(orderDetail);
+    public int createOrderDetail(OrderDetail orderDetail) {
+        return orderDetailDao.createOrderDetail(orderDetail);
     }
 
 }

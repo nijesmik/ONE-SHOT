@@ -23,8 +23,8 @@ public class OrderDetailRestController {
 
     @PostMapping("/create")
     @ApiOperation(value = "주문 추가", notes = "새로운 주문을 추가한다")
-    public ResponseEntity<?> addOrderDetail(OrderDetail orderDetail) {
-        int result = orderDetailService.addOrderDetail(orderDetail);
+    public ResponseEntity<?> createOrderDetail(OrderDetail orderDetail) {
+        int result = orderDetailService.createOrderDetail(orderDetail);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -15,8 +15,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public int regist(Order order) {
-        return orderDao.registOrder(order);
+    public int createOrder(Order order) {
+        return orderDao.createOrder(order);
     }
 
     @Override

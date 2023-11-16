@@ -14,13 +14,13 @@
 	  <result column="updated_time" property="updatedTime"/>
 	</resultMap>
 	
-    <select id="selectOne" parameterType="String" resultMap="User">
+    <select id="login" parameterType="String" resultMap="User">
         SELECT *
         FROM user
         WHERE email = #{email}
     </select>
 
-	<insert id="insertUser" parameterType="User">
+	<insert id="signup" parameterType="User">
 		INSERT INTO user
 		(email, password, nickname)
 		VALUES (#{email}, #{password}, #{nickname})

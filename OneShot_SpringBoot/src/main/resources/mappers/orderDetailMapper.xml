@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oneshot.model.dao.OrderDetailDao">
     
-    <insert id="addOrderDetail" parameterType="OrderDetail">
+    <insert id="createOrderDetail" parameterType="OrderDetail">
         INSERT INTO order_detail
         (order_id, menu_id, order_user, amount)
         VALUES (#{orderId}, #{menuId}, #{orderUser}, #{amount})
