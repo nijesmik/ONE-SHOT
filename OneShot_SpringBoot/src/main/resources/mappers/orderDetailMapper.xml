@@ -4,10 +4,47 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oneshot.model.dao.OrderDetailDao">
     
+    <resultMap id="OrderDetail" type="OrderDetail">
+      <result column="order_detail_id" property="orderDetailId"/>
+      <result column="order_id" property="orderId"/>
+      <result column="menu_id" property="menuId"/>
+      <result column="order_user" property="orderUser"/>
+      <result column="amount" property="amount"/>
+      <result column="created_time" property="createdTime"/>
+      <result column="updated_time" property="updatedTime"/>
+    </resultMap>
+    
+    <parameterMap type="OrderDetail" id="OrderDetail"/>
+
+    
     <insert id="createOrderDetail" parameterType="OrderDetail">
         INSERT INTO order_detail
         (order_id, menu_id, order_user, amount)
         VALUES (#{orderId}, #{menuId}, #{orderUser}, #{amount})
     </insert>
-	
+    
+    <select id="selectOrderDetail" parameterType="int" resultMap="OrderDetail">
+        SELECT *
+        FROM order_detail
+        WHERE order_detail_id = #{orderDetailId}
+    </select>
+    
+    <update id="updateOrderDetail" parameterMap="OrderDetail">
+        UPDATE order_detail
+        SET
+        order_detail_id = order_detail_id
+        <if test="menuId != 0">
+            , menu_id = #{menuId}
+        </if>
+        <if test="amount != 0">
+            , amount = #{amount}
+        </if>
+        WHERE order_detail_id = #{orderDetailId}
+    </update>
+    
+    <delete id="deleteOrderDetail" parameterType="int">
+        DELETE
+        FROM order_detail
+        WHERE order_detail_id = #{orderDetailId}
+    </delete>
 </mapper>

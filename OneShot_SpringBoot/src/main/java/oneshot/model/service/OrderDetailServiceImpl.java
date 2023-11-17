@@ -19,4 +19,19 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         return orderDetailDao.createOrderDetail(orderDetail);
     }
 
+    @Override
+    public OrderDetail selectOrderDetail(int orderDetailId) {
+        return orderDetailDao.selectOrderDetail(orderDetailId);
+    }
+
+    @Override
+    public int updateOrderDetail(int orderDetailId, OrderDetail orderDetail) {
+        orderDetail.setOrderDetailId(orderDetailId);
+        return orderDetailDao.updateOrderDetail(orderDetail);
+    }
+
+    @Override
+    public int deleteOrderDetail(int orderDetailId) {
+        return orderDetailDao.deleteOrderDetail(orderDetailId);
+    }
 }
