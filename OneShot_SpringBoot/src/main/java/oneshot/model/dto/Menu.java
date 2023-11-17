@@ -7,6 +7,7 @@ public class Menu {
     private int menuId;
     private int brandId;
     private String menuName;
+    private String img;
     private int price;
     private String size;
     private String temperature;
@@ -89,11 +90,33 @@ public class Menu {
         this.updatedTime = updatedTime;
     }
 
-    @Override
-    public String toString() {
-        return "Menu [menuId=" + menuId + ", brandId=" + brandId + ", menuName=" + menuName + ", price=" + price
-                + ", size=" + size + ", temperature=" + temperature + ", type=" + type + ", createdTime=" + createdTime
-                + ", updatedTime=" + updatedTime + "]";
+    public String getImg() {
+        return img;
     }
 
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public void update(int menuId, Menu oldMenu) {
+        this.menuId = menuId;
+        if (this.menuName == null) {
+            this.menuName = oldMenu.menuName;
+        }
+        if (this.img == null) {
+            this.img = oldMenu.img;
+        }
+        if (this.price == 0) {
+            this.price = oldMenu.price;
+        }
+        if (this.size == null) {
+            this.size = oldMenu.size;
+        }
+        if (this.temperature == null) {
+            this.temperature = oldMenu.temperature;
+        }
+        if (this.type == null) {
+            this.type = oldMenu.type;
+        }
+    }
 }
