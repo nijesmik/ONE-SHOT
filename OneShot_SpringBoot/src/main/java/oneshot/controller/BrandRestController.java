@@ -42,6 +42,9 @@ public class BrandRestController {
         if (brands == null) {
             return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        if (brands.size() == 0) {
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<List<Brand>>(brands, HttpStatus.OK);
     }
 
