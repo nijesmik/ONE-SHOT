@@ -3,5 +3,43 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oneshot.model.dao.BrandDao">
-	
+    <resultMap id="Brand" type="oneshot.model.dto.Brand">
+        <result column="brand_id" property="brandId"/>
+        <result column="brand_name" property="brandName"/>
+        <result column="logo" property="logo"/>
+        <result column="brand_url" property="brandUrl"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="updated_time" property="updatedTime"/>
+    </resultMap>
+
+    <parameterMap id="Brand" type="oneshot.model.dto.Brand"/>
+
+    <insert id="insert" parameterMap="Brand">
+        INSERT INTO brand
+        (brand_name, logo, brand_url)
+        VALUES (#{brandName}, #{logo}, #{brandUrl})
+    </insert>
+
+    <select id="selectAll" resultMap="Brand">
+        SELECT * FROM brand
+    </select>
+
+    <select id="selectOne" parameterType="int" resultMap="Brand">
+        SELECT * FROM brand
+        WHERE brand_id = #{id}
+    </select>
+
+    <update id="update" parameterMap="Brand">
+        UPDATE brand
+        SET
+        brand_name = #{brandName},
+        logo = #{logo},
+        brand_url = #{brandUrl}
+        WHERE brand_id = #{brandId}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM brand
+        WHERE brand_id = #{id}
+    </delete>
 </mapper>
