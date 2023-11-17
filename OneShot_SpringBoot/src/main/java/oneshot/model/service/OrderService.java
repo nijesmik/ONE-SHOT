@@ -4,7 +4,11 @@ import oneshot.model.dto.Order;
 import oneshot.model.dto.User;
 
 public interface OrderService {
-    int createOrder(User user, String url);
+    int createOrder(User user, String orderCode);
 
-    String generateRandomUrl();
+    String createOrderCode();
+
+    Order getOrder(String orderCode);
+
+    int deleteOrder(int orderId);
 }

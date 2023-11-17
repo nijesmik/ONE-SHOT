@@ -2,15 +2,15 @@ package oneshot.util;
 
 import java.util.Random;
 
-public class RandomUrl {
-    private static final int URL_LENGTH = 10;
-    private static final int LOWERCASE_A = 96;
+public class RandomCode {
+    private static final int CODE_LENGTH = 10;
+    private static final int LOWERCASE_A = 97;
     private static final int ALPHABET_SIZE = 26;
     private static final int DIGIT_SIZE = 10;
 
     public static String get() {
         StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 0; i < URL_LENGTH; i++) {
+        for (int i = 0; i < CODE_LENGTH; i++) {
             appendRandomly(stringBuffer);
         }
         return stringBuffer.toString();

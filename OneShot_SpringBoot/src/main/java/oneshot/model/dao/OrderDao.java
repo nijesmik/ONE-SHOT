@@ -3,7 +3,11 @@ package oneshot.model.dao;
 import oneshot.model.dto.Order;
 
 public interface OrderDao {
-    int createOrder(Order order);
+    int insert(Order order);
 
-    int urlCheck(String url);
+    int countByOrderCode(String orderCode);
+
+    Order selectByOrderCode(String orderCode);
+
+    int delete(int orderId);
 }
