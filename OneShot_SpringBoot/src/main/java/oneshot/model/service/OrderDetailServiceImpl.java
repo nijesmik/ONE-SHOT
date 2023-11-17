@@ -23,4 +23,20 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public List<OrderDetail> getOrderDetails(int orderId) {
         return orderDetailDao.selectByOrderId(orderId);
     }
+  
+    @Override
+    public OrderDetail selectOrderDetail(int orderDetailId) {
+        return orderDetailDao.selectOrderDetail(orderDetailId);
+    }
+
+    @Override
+    public int updateOrderDetail(int orderDetailId, OrderDetail orderDetail) {
+        orderDetail.setOrderDetailId(orderDetailId);
+        return orderDetailDao.updateOrderDetail(orderDetail);
+    }
+
+    @Override
+    public int deleteOrderDetail(int orderDetailId) {
+        return orderDetailDao.deleteOrderDetail(orderDetailId);
+    }
 }

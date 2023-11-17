@@ -8,4 +8,10 @@ public interface OrderDetailService {
     int createOrderDetail(OrderDetail orderDetail);
 
     List<OrderDetail> getOrderDetails(int orderId);
+
+    OrderDetail selectOrderDetail(int orderDetailId);
+
+    int updateOrderDetail(int orderDetailId, OrderDetail orderDetail);
+
+    int deleteOrderDetail(int orderDetailId);
 }

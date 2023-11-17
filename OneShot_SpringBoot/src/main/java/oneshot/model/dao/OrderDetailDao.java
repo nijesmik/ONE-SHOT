@@ -7,4 +7,10 @@ public interface OrderDetailDao {
     int createOrderDetail(OrderDetail orderDetail);
 
     List<OrderDetail> selectByOrderId(int orderId);
+
+    OrderDetail selectOrderDetail(int orderDetailId);
+
+    int updateOrderDetail(OrderDetail orderDetail);
+
+    int deleteOrderDetail(int orderDetailId);
 }
