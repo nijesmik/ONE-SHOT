@@ -48,9 +48,9 @@ public class BrandRestController {
         return new ResponseEntity<List<Brand>>(brands, HttpStatus.OK);
     }
 
-    @PatchMapping("/update/{brandId}")
+    @PatchMapping("/update/{brand_id}")
     @ApiOperation(value = "브랜드 수정")
-    public ResponseEntity<?> updateBrand(Brand brand, @PathVariable int brandId) {
+    public ResponseEntity<?> updateBrand(Brand brand, @PathVariable(name = "brand_id") int brandId) {
         int result = brandService.updateBrand(brand, brandId);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -58,9 +58,9 @@ public class BrandRestController {
         return new ResponseEntity<Integer>(result, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{brandId}")
+    @DeleteMapping("/delete/{brand_id}")
     @ApiOperation(value = "브랜드 삭제")
-    public ResponseEntity<?> deleteBrand(@PathVariable int brandId) {
+    public ResponseEntity<?> deleteBrand(@PathVariable(name = "brand_id") int brandId) {
         int result = brandService.deleteBrand(brandId);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
