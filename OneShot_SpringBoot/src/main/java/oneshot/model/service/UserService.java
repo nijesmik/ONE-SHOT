@@ -7,4 +7,7 @@ public interface UserService {
 
     int signup(User user);
 
+    int updateUser(User user, int userId);
+
+    int deleteUser(int userId);
 }

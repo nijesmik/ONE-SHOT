@@ -16,12 +16,17 @@
     
     <parameterMap type="OrderDetail" id="OrderDetail"/>
 
-    
     <insert id="createOrderDetail" parameterType="OrderDetail">
         INSERT INTO order_detail
         (order_id, menu_id, order_user, amount)
         VALUES (#{orderId}, #{menuId}, #{orderUser}, #{amount})
     </insert>
+
+    <select id="selectByOrderId" parameterType="int" resultMap="OrderDetail">
+        SELECT *
+        FROM order_detail
+        WHERE order_id = #{orderId}
+    </select>
     
     <select id="selectOrderDetail" parameterType="int" resultMap="OrderDetail">
         SELECT *

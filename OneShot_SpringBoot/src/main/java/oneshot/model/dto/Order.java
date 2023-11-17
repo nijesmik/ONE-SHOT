@@ -6,12 +6,17 @@ import io.swagger.annotations.ApiModel;
 public class Order {
     private int orderId;
     private int userId;
-    private String orderUrl;
+    private String orderCode;
     private int service;
     private String createdTime;
     private String updatedTime;
 
     public Order() {
+    }
+
+    public Order(int userId, String orderCode) {
+        this.userId = userId;
+        this.orderCode = orderCode;
     }
 
     public int getOrderId() {
@@ -30,12 +35,12 @@ public class Order {
         this.userId = userId;
     }
 
-    public String getOrderUrl() {
-        return orderUrl;
+    public String getOrderCode() {
+        return orderCode;
     }
 
-    public void setOrderUrl(String orderUrl) {
-        this.orderUrl = orderUrl;
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
     }
 
     public int getService() {
@@ -64,7 +69,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order [orderId=" + orderId + ", userId=" + userId + ", orderUrl=" + orderUrl + ", service=" + service
+        return "Order [orderId=" + orderId + ", userId=" + userId + ", orderUrl=" + orderCode + ", service=" + service
                 + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
     }
 

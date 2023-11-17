@@ -3,8 +3,13 @@ package oneshot.model.dao;
 import oneshot.model.dto.User;
 
 public interface UserDao {
-    User login(String id);
+    User selectByEmail(String id);
 
-    int signup(User user);
+    int insert(User user);
 
+    User selectByUserId(int userId);
+
+    int update(User user);
+
+    int delete(int userId);
 }

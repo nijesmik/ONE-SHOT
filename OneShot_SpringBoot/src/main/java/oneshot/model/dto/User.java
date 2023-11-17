@@ -8,7 +8,7 @@ public class User {
     private String email;
     private String password;
     private String nickname;
-    private int admin;
+    private Integer admin;
     private String createdTime;
     private String updatedTime;
 
@@ -77,4 +77,20 @@ public class User {
                 + ", admin=" + admin + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
     }
 
+    public boolean ComparePassword(User user) {
+        return this.password.equals(user.password);
+    }
+
+    public void importData(int userId, User originalUserData) {
+        this.userId = userId;
+        if (this.password == null) {
+            this.password = originalUserData.password;
+        }
+        if (this.nickname == null) {
+            this.nickname = originalUserData.nickname;
+        }
+        if (this.admin == null) {
+            this.admin = originalUserData.admin;
+        }
+    }
 }
