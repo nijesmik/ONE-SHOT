@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `order` ( -- 개별 주문의 종합 결과 주문서
   `user_id` INT NOT NULL COMMENT '주문서 생성 유저 | 비회원일 경우 고정값을 가짐',
   `brand_id` INT NOT NULL COMMENT '주문하는 브랜드 id',
   `order_code` VARCHAR(255) NOT NULL COMMENT '주문서 공유 url',
-  `service` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '주문서 서비스 노출 여부 : 0 노출 | 1 노출 안함',
+  `service` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '주문서 서비스 종료 여부 : 0 종료 안됨 | 1 종료됨',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '주문서 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 주문서 row 수정 시각',
   CONSTRAINT `fk_order_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`), -- 유저id 외래키
