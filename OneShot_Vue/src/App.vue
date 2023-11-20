@@ -1,10 +1,4 @@
 <template>
-	<h1>테스트</h1>
-	<div>
-		<router-link :to="{ name: 'home' }">Home Test</router-link> |
-		<router-link :to="{ name: 'order-brand' }">Order Brand Test</router-link> |
-		<!-- <router-link :to="{ name: 'order-menu'}">Order Menu Test</router-link> -->
-	</div>
 	<div class="wrapper">
 		<router-view />
 	</div>
