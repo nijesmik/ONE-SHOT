@@ -33,6 +33,12 @@
         FROM user
         WHERE user_id = #{userId}
     </select>
+    
+    <select id="idCheck" parameterType="String" resultType="int">
+        SELECT COUNT(*) AS CNT
+        FROM user
+        WHERE email = #{email}
+    </select>
 
     <update id="update" parameterMap="User">
         UPDATE user

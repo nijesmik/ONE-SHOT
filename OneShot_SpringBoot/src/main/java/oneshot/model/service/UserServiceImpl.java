@@ -1,10 +1,11 @@
 package oneshot.model.service;
 
-import oneshot.model.dao.UserDao;
-import oneshot.model.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import oneshot.model.dao.UserDao;
+import oneshot.model.dto.User;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,6 +29,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int idCheck(String email) {
+        return userDao.idCheck(email);
+    }
+
+    @Override
     public int updateUser(User user, int userId) {
         User originalUserData = userDao.selectByUserId(userId);
         user.importData(userId, originalUserData);
@@ -38,4 +44,5 @@ public class UserServiceImpl implements UserService {
     public int deleteUser(int userId) {
         return userDao.delete(userId);
     }
+
 }
