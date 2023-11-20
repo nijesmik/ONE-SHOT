@@ -40,34 +40,44 @@ VALUES
 CREATE TABLE IF NOT EXISTS `menu` ( -- 메뉴 정보를 저장하는 테이블 | 브랜드에 귀속
   `menu_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '메뉴 기본 PK',
   `brand_id` INT NOT NULL COMMENT '메뉴가 속한 브랜드의 id',
-  `menu_name` VARCHAR(255) NOT NULL COMMENT '메뉴 이름',
+  `menu_name` VARCHAR(255) NOT NULL UNIQUE COMMENT '메뉴 이름',
   `img` VARCHAR(255) NOT NULL COMMENT '메뉴 이미지',
-  `price` INT COMMENT '메뉴 가격',
-  `size` VARCHAR(255) COMMENT '메뉴 사이즈',
-  `temperature` ENUM ('ICE', 'HOT', 'ELSE') COMMENT '음료 온도 : ICE : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
   `type` ENUM ('COFFEE', 'DECAFFEINE', 'ELSE') COMMENT '메뉴 타입 : COFFEE : 커피 | DECAFFEINE : 디카페인 | ELSE : 기타',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 메뉴 row 수정 시각',
-  UNIQUE KEY `uq_menu` (`menu_name`, `size`),
   CONSTRAINT `fk_menu_brand_id` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`) -- 브랜드id 외래키
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `menu_detail` ( -- 메뉴 상세 정보를 저장하는 테이블 | 메뉴에 귀속
+  `menu_detail_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '메뉴 기본 PK',
+  `menu_id` INT NOT NULL COMMENT '메뉴 상세가 속한 메뉴의 id',
+  `price` INT NOT NULL COMMENT '메뉴 가격',
+  `size` ENUM ('S', 'M', 'L') NOT NULL DEFAULT 'M' COMMENT '음료 온도 : ICE : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
+  `size_name` VARCHAR(255) COMMENT '메뉴 사이즈의 브랜드 별 이름',
+  `temperature` ENUM ('ICE', 'HOT', 'ELSE') COMMENT '음료 온도 : ICE : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
+  `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴 row 생성 시각',
+  `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 메뉴 row 수정 시각',
+  UNIQUE KEY (`menu_id`, `size`, `temperature`),
+  CONSTRAINT `fk_menu_detail_id` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) -- 메뉴id 외래키
+) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `order` ( -- 개별 주문의 종합 결과 주문서 정보 테이블 | 유저에게 귀속
   `order_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '주문서 기본 PK',
   `user_id` INT NOT NULL COMMENT '주문서 생성 유저 | 비회원일 경우 고정값을 가짐',
-  `order_url` VARCHAR(255) NOT NULL COMMENT '주문서 공유 url',
+  `brand_id` INT NOT NULL COMMENT '주문하는 브랜드 id',
+  `order_code` VARCHAR(255) NOT NULL COMMENT '주문서 공유 url',
   `service` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '주문서 서비스 노출 여부 : 0 노출 | 1 노출 안함',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '주문서 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 주문서 row 수정 시각',
-  CONSTRAINT `fk_order_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) -- 유저id 외래키
+  CONSTRAINT `fk_order_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`), -- 유저id 외래키
+  CONSTRAINT `fk_order_brand_id` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`) -- 브랜드id 외래키
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `order_detail` ( -- 개별 주문 정보 테이블 | 주문서에 귀속
   `order_detail_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '주문 기본 PK',
   `order_id` INT NOT NULL COMMENT '주문이 속한 주문서의 id',
   `menu_id` INT NOT NULL COMMENT '주문에 해당하는 메뉴의 id',
-  `order_code` VARCHAR(255) NOT NULL COMMENT '주문을 실시한 사용자 이름',
+  `name` VARCHAR(255) NOT NULL COMMENT '주문을 실시한 사용자 이름',
   `amount` INT NOT NULL DEFAULT 1 COMMENT '주문 내역에 속한 메뉴의 개수',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '주문 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 주문 row 수정 시각',

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oneshot.model.dao.MenuDetailDao">
+    <resultMap id="MenuDetail" type="oneshot.model.dto.MenuDetail">
+        <result column="menu_detail_id" property="menuDetailId"/>
+        <result column="menu_id" property="menuId"/>
+        <result column="price" property="price"/>
+        <result column="size" property="size"/>
+        <result column="size_name" property="sizeName"/>
+        <result column="temperature" property="temperature"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="updated_time" property="updatedTime"/>
+    </resultMap>
+
+    <parameterMap type="MenuDetail" id="MenuDetail"/>
+
+    <insert id="createMenuDetail" parameterType="MenuDetail">
+        INSERT INTO menu_detail
+        (menu_id, price, size, size_name, temperature)
+        VALUES (#{menuId}, #{price}, #{size}, #{sizeName}, #{temperature})
+    </insert>
+
+    <select id="selectMenuDetail" parameterType="int" resultMap="MenuDetail">
+        SELECT *
+        FROM menu_detail
+        WHERE menu_detail_id = #{menuDetailId}
+    </select>
+    
+    <update id="updateMenuDetail" parameterMap="MenuDetail">
+        UPDATE menu_detail
+        SET
+        menu_detail_id = menu_detail_id
+        <if test="price != null">
+            , price = #{price}
+        </if>
+        <if test="size != null">
+            , size = #{size}
+        </if>
+        <if test="sizeName != null">
+            , size_name = #{sizeName}
+        </if>
+        <if test="temperature != null">
+            , temperature = #{temperature}
+        </if>
+        WHERE menu_detail_id = #{menuDetailId}
+    </update>
+    
+    <delete id="deleteMenuDetail" parameterType="int">
+        DELETE
+        FROM menu_detail
+        WHERE menu_detail_id = #{menuDetailId}
+    </delete>
+</mapper>
