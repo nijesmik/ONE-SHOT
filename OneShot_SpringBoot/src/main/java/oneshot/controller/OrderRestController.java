@@ -36,14 +36,24 @@ public class OrderRestController {
 
     @PostMapping("/create")
     @ApiOperation(value = "주문서 생성", notes = "새로운 주문서 정보를 생성한다")
-    public ResponseEntity<?> createOrder(HttpSession session) {
-        Object userObject = session.getAttribute("loginUser");
-        if (userObject == null || userObject == "") {
-            return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<?> createOrder(HttpSession session, @RequestParam String brandId) {
+//        Object userObject = session.getAttribute("loginUser");
+//        if (userObject == null || userObject == "") {
+//            return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+//        }
+        // TODO: login한 유저 받아오기
+
+        // 테스트용 유저
+        User user = new User();
+        user.setUserId(1);
+
+        String orderCode = null;
+        try {
+            orderCode = orderService.createOrder(user, brandId);
+        } catch (NumberFormatException e) {
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         }
-        String orderCode = orderService.createOrderCode();
-        int result = orderService.createOrder((User) userObject, orderCode);
-        if (result == 0) {
+        if (orderCode == null) {
             return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<String>(orderCode, HttpStatus.CREATED);
@@ -59,9 +69,8 @@ public class OrderRestController {
         }
         Map<String, Object> result = new HashMap<>();
         result.put("order", order);
-        System.out.println(order.toString());
         result.put("orderDetail", orderDetails);
-        return new ResponseEntity<Map<String, Object>>(result, HttpStatus.CREATED);
+        return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{order_id}")

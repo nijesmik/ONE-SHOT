@@ -15,10 +15,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public int createOrder(User user, String orderUrl) {
+    public String createOrder(User user, String brandId) {
+        String orderCode = createOrderCode();
         int userId = user.getUserId();
-        Order order = new Order(userId, orderUrl);
-        return orderDao.insert(order);
+        Order order = new Order(Integer.parseInt(brandId), userId, orderCode);
+        int result = orderDao.insert(order);
+        if (result == 0) {
+            return null;
+        }
+        return orderCode;
     }
 
     @Override

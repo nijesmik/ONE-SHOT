@@ -5,6 +5,7 @@
 <mapper namespace="oneshot.model.dao.OrderDao">
     <resultMap id="Order" type="oneshot.model.dto.Order">
         <result column="order_id" property="orderId"/>
+        <result column="brand_id" property="brandId"/>
         <result column="user_id" property="userId"/>
         <result column="order_code" property="orderCode"/>
         <result column="created_time" property="createdTime"/>
@@ -14,8 +15,8 @@
     <parameterMap id="Order" type="oneshot.model.dto.Order"/>
 
     <insert id="insert" parameterMap="Order">
-        INSERT INTO oneshot.order (user_id, order_code)
-        VALUES (#{userId}, #{orderCode})
+        INSERT INTO oneshot.order (brand_id, user_id, order_code)
+        VALUES (#{brandId}, #{userId}, #{orderCode})
     </insert>
 
     <select id="countByOrderCode" parameterType="String" resultType="int">

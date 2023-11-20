@@ -4,7 +4,7 @@ import oneshot.model.dto.Order;
 import oneshot.model.dto.User;
 
 public interface OrderService {
-    int createOrder(User user, String orderCode);
+    String createOrder(User user, String brandId);
 
     String createOrderCode();
 
