@@ -15,8 +15,8 @@
 
     <insert id="insert" parameterMap="Menu">
         INSERT INTO menu
-        (brand_id, menu_name, img, price, size, temperature, type)
-        VALUES (#{brandId}, #{menuName}, #{img}, #{price}, #{size}, #{temperature}, #{type})
+        (brand_id, menu_name, img, type)
+        VALUES (#{brandId}, #{menuName}, #{img}, #{type})
     </insert>
 
     <select id="selectByBrandId" parameterType="int" resultMap="Menu">
@@ -34,9 +34,6 @@
         SET
         menu_name = #{menuName},
         img = #{img},
-        price = #{price},
-        size = #{size},
-        temperature = #{temperature},
         type = #{type}
         WHERE menu_id = #{menuId}
     </update>

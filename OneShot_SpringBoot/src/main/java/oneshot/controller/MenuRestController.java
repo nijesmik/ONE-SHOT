@@ -1,10 +1,7 @@
 package oneshot.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import java.util.List;
-import oneshot.model.dto.Menu;
-import oneshot.model.service.MenuService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import oneshot.model.dto.Menu;
+import oneshot.model.service.MenuService;
 
 @RestController
 @CrossOrigin("*")
@@ -28,7 +31,14 @@ public class MenuRestController {
 
     @PostMapping("/create")
     @ApiOperation(value = "메뉴 추가")
-    private ResponseEntity<?> createMenu(Menu menu) {
+    private ResponseEntity<?> createMenu(@RequestBody Menu menu) {
+        System.out.println("*");
+        System.out.println("*");
+        System.out.println("*");
+        System.out.println("*");
+        System.out.println("*");
+        System.out.println("*");
+        System.out.println(menu.toString());
         int result = menuService.createMenu(menu);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -66,7 +76,7 @@ public class MenuRestController {
 
     @PatchMapping("/update/{menu_id}")
     @ApiOperation(value = "메뉴 수정")
-    private ResponseEntity<?> updateMenu(Menu menu, @PathVariable(name = "menu_id") int menuId) {
+    private ResponseEntity<?> updateMenu(@RequestBody Menu menu, @PathVariable(name = "menu_id") int menuId) {
         int result = menuService.updateMenu(menu, menuId);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
