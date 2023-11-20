@@ -15,22 +15,24 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import Brand from "@/components/Brand.vue";
-const GET_BRANDS_API = "http://localhost:8080/api/brand";
-const ORDER_API = "http://localhost:8080/api/order/create";
+import { useUrlStore } from "@/stores/url";
 
+const URL = useUrlStore();
 const brands = ref([]);
 const router = useRouter();
 
-axios.get(GET_BRANDS_API).then((res) => {
+axios.get(URL.API.BRAND).then((res) => {
 	brands.value = res.data;
 });
 
 const selectBrand = (brand) => {
-	const isConfirmed = confirm("주문하시겠습니까?");
+	const isConfirmed = confirm(`${brand.brandName}에서 주문하시겠습니까?`);
 	if (isConfirmed) {
-		axios.post(`${ORDER_API}?brandId=${brand.brandId}`).then((res) => {
-			router.push({ name: "order-menu", params: { orderCode: res.data } });
-		});
+		axios
+			.post(`${URL.API.ORDER_CREATE}?brandId=${brand.brandId}`)
+			.then((res) => {
+				router.push({ name: "order-menu", params: { orderCode: res.data } });
+			});
 	}
 };
 </script>
