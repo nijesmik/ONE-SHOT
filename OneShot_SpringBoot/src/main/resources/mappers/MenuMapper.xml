@@ -23,12 +23,13 @@
         SELECT *, d.price FROM menu m
         LEFT JOIN menu_detail d
         ON m.menu_id = d.menu_id 
-        WHERE m.brand_id = #{BrandId} AND d.size = "M" AND d.temperature = "ICE"
+        WHERE m.brand_id = #{BrandId} AND d.size = "M" AND d.temperature = "ICE" AND d.price IS NOT NULL
     </select>
     
     <select id="selectMenuType" parameterType="int" resultType="String">
-        SELECT DISTINCT type FROM menu
-        WHERE brand_id = #{BrandId}
+        SELECT DISTINCT m.type FROM menu_detail d
+        INNER JOIN menu m
+        WHERE m.brand_id = #{BrandId} AND d.price IS NOT NULL
     </select>
 
     <select id="selectOne" resultMap="Menu">
