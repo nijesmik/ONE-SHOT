@@ -1,10 +1,7 @@
 package oneshot.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import java.util.List;
-import oneshot.model.dto.Brand;
-import oneshot.model.service.BrandService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import oneshot.model.dto.Brand;
+import oneshot.model.service.BrandService;
 
 @RestController
 @CrossOrigin("*")
@@ -27,7 +30,7 @@ public class BrandRestController {
 
     @PostMapping("/create")
     @ApiOperation(value = "브랜드 추가")
-    public ResponseEntity<Integer> createBrand(Brand brand) {
+    public ResponseEntity<Integer> createBrand(@RequestBody Brand brand) {
         int result = brandService.createBrand(brand);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -50,7 +53,7 @@ public class BrandRestController {
 
     @PatchMapping("/update/{brand_id}")
     @ApiOperation(value = "브랜드 수정")
-    public ResponseEntity<?> updateBrand(Brand brand, @PathVariable(name = "brand_id") int brandId) {
+    public ResponseEntity<?> updateBrand(@RequestBody Brand brand, @PathVariable(name = "brand_id") int brandId) {
         int result = brandService.updateBrand(brand, brandId);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);

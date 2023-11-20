@@ -15,49 +15,51 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import oneshot.model.dto.OrderDetail;
-import oneshot.model.service.OrderDetailService;
+import oneshot.model.dto.MenuDetail;
+import oneshot.model.service.MenuDetailService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/order-detail")
-@Api(tags = "주문상세 컨트롤러")
-public class OrderDetailRestController {
+@RequestMapping("/api/menu-detail")
+@Api(tags = "메뉴상세 컨트롤러")
+public class MenuDetailRestController {
     @Autowired
-    private OrderDetailService orderDetailService;
+    private MenuDetailService menuDetailService;
 
     @PostMapping("/create")
-    @ApiOperation(value = "주문 추가", notes = "새로운 주문을 추가한다")
-    public ResponseEntity<?> createOrderDetail(@RequestBody OrderDetail orderDetail) {
-        int result = orderDetailService.createOrderDetail(orderDetail);
+    @ApiOperation(value = "메뉴상세 추가")
+    private ResponseEntity<?> createMenuDetail(@RequestBody MenuDetail menuDetail) {
+        int result = menuDetailService.createMenuDetail(menuDetail);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{orderDetailId}")
-    @ApiOperation(value = "주문 조회", notes = "주문상세를 조회한다")
-    public ResponseEntity<?> selectOrderDetail(@PathVariable int orderDetailId) {
-        OrderDetail orderDetail = orderDetailService.selectOrderDetail(orderDetailId);
-        return new ResponseEntity<OrderDetail>(orderDetail, HttpStatus.OK);
+    @GetMapping("/{menuDetailId}")
+    @ApiOperation(value = "메뉴 개별 조회")
+    private ResponseEntity<?> selectMenuDetail(@PathVariable int menuDetailId) {
+        MenuDetail menuDetail = menuDetailService.selectMenuDetail(menuDetailId);
+        if (menuDetail == null) {
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<MenuDetail>(menuDetail, HttpStatus.OK);
     }
 
-    @PatchMapping("/{orderDetailId}")
-    @ApiOperation(value = "주문 수정", notes = "주문상세를 수정한다")
-    public ResponseEntity<?> updateOrderDetail(@PathVariable int orderDetailId, @RequestBody OrderDetail orderDetail) {
-        int result = orderDetailService.updateOrderDetail(orderDetailId, orderDetail);
+    @PatchMapping("/update/{menuDetailId}")
+    @ApiOperation(value = "메뉴 수정")
+    private ResponseEntity<?> updateMenuDetail(@PathVariable int menuDetailId, @RequestBody MenuDetail menuDetail) {
+        int result = menuDetailService.updateMenuDetail(menuDetailId, menuDetail);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<Integer>(result, HttpStatus.OK);
-
     }
 
-    @DeleteMapping("/{orderDetailId}")
-    @ApiOperation(value = "주문 삭제", notes = "주문상세를 삭제한다")
-    public ResponseEntity<?> deleteOrderDetail(@PathVariable int orderDetailId) {
-        int result = orderDetailService.deleteOrderDetail(orderDetailId);
+    @DeleteMapping("/delete/{menuDetailId}")
+    @ApiOperation(value = "메뉴 삭제")
+    private ResponseEntity<?> deleteMenuDetail(@PathVariable int menuDetailId) {
+        int result = menuDetailService.deleteMenuDetail(menuDetailId);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }

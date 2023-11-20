@@ -1,10 +1,7 @@
 package oneshot.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import javax.servlet.http.HttpSession;
-import oneshot.model.dto.User;
-import oneshot.model.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import oneshot.model.dto.User;
+import oneshot.model.service.UserService;
 
 @RestController
 @CrossOrigin("*")
@@ -46,7 +49,7 @@ public class UserRestController {
 
     @PostMapping("/signup")
     @ApiOperation(value = "유저 회원가입", notes = "유저를 등록한다")
-    public ResponseEntity<?> signup(User user) {
+    public ResponseEntity<?> signup(@RequestBody User user) {
         int result = userService.signup(user);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -56,7 +59,7 @@ public class UserRestController {
 
     @PatchMapping("/update/{user_id}")
     @ApiOperation(value = "회원 정보 수정")
-    public ResponseEntity<?> updateUser(@PathVariable(name = "user_id") int userId, User user) {
+    public ResponseEntity<?> updateUser(@PathVariable(name = "user_id") int userId, @RequestBody User user) {
         int result = userService.updateUser(user, userId);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
