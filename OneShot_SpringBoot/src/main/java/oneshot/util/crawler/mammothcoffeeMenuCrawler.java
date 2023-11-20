@@ -4,10 +4,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-public class mammothcoffeeCrawler {
+public class mammothcoffeeMenuCrawler {
     static int rs = 0;
+    static int brandId = 2;
 
-    public static void mammothcoffeeCrawling() {
+    public static void mammothcoffeeMenuCrawling() {
         try {
             String URL = "https://www.mmthcoffee.com/sub/menu/list.html";
             Document doc = Jsoup.connect(URL).ignoreContentType(true).get();
@@ -21,22 +22,22 @@ public class mammothcoffeeCrawler {
                 for (int j = 0; j < innerElements.size(); j++) {
                     img = "https://www.mmthcoffee.com" + innerElements.get(j).select(".img_wrap > img").attr("src");
                     menuName = innerElements.get(j).select("strong").text();
-                    query.append(String.format("(\"2\", \"%s\", \"%s\", \"%s\"),", menuName, img, type));
+                    query.append(String.format("(%d, \"%s\", \"%s\", \"%s\"),", brandId, menuName, img, type));
                 }
             }
             try {
-                rs += mysqlUtil.insertDB(query.substring(0, query.length() - 1) + ";");
+                rs += mysqlUtil.insertMenu(query.substring(0, query.length() - 1) + ";");
             } catch (Exception e) {
-                System.out.println("Mammothcoffee SQL Exception : " + e.getMessage());
+                System.out.println("Mammothcoffee Menu SQL Exception : " + e.getMessage());
             }
         } catch (Exception e) {
-            System.out.println("Mammothcoffee Crawling Exception : " + e.getMessage());
+            System.out.println("Mammothcoffee Menu Crawling Exception : " + e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        mammothcoffeeCrawling();
-        System.out.println("Mammothcoffee Affected Row : " + rs);
+        mammothcoffeeMenuCrawling();
+        System.out.println("Mammothcoffee Menu Affected Row : " + rs);
     }
 
 }

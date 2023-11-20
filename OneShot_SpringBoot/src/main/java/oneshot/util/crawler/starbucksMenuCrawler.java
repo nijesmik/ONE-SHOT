@@ -11,10 +11,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-public class starbucksCrawler {
+public class starbucksMenuCrawler {
     static int rs = 0;
+    static int brandId = 1;
 
-    public static void starbucksCrawling(String menuTabCode) {
+    public static void starbucksMenuCrawling(String menuTabCode) {
         try {
             String URL = "https://www.starbucks.co.kr/upload/json/menu/" + menuTabCode + ".js";
             Document doc = Jsoup.connect(URL).ignoreContentType(true).get();
@@ -41,16 +42,16 @@ public class starbucksCrawler {
                     }
                 }
                 if (menuName != null && img != null) {
-                    query.append(String.format("(\"1\", \"%s\", \"%s\", \"%s\"),", menuName, img, type));
+                    query.append(String.format("(%d, \"%s\", \"%s\", \"%s\"),", brandId, menuName, img, type));
                 }
             }
             try {
-                rs += mysqlUtil.insertDB(query.substring(0, query.length() - 1) + ";");
+                rs += mysqlUtil.insertMenu(query.substring(0, query.length() - 1) + ";");
             } catch (Exception e) {
-                System.out.println("Starbucks SQL Exception : " + e.getMessage());
+                System.out.println("Starbucks Menu SQL Exception : " + e.getMessage());
             }
         } catch (Exception e) {
-            System.out.println("Starbucks Crawling Exception : " + e.getMessage());
+            System.out.println("Starbucks Menu Crawling Exception : " + e.getMessage());
         }
     }
 
@@ -67,8 +68,8 @@ public class starbucksCrawler {
         menuTabCodelist.add("W0000053");
         menuTabCodelist.add("W0000062");
         for (String menuTabCode : menuTabCodelist) {
-            starbucksCrawling(menuTabCode);
+            starbucksMenuCrawling(menuTabCode);
         }
-        System.out.println("Starbucks Affected Row : " + rs);
+        System.out.println("Starbucks Menu Affected Row : " + rs);
     }
 }
