@@ -1,8 +1,8 @@
 <template>
-	<div class="box">
+	<div class="ratio ratio-1x1">
 		<img :src="brand.logo" :alt="brand.brandName" />
 	</div>
-	<div>{{ brand.brandName }}</div>
+	<h5 class="brand-name">{{ brand.brandName }}</h5>
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>
@@ -20,12 +20,8 @@ img {
 	object-fit: contain;
 }
 
-.box {
-	width: 100%;
-	max-height: 250px;
-}
-
-div {
-	margin: 2%;
+.brand-name {
+  margin-top: 10%;
+  margin-bottom: 0;
 }
 </style>

@@ -21,6 +21,6 @@ img {
 }
 
 div {
-	margin: 2%;
+  margin: 2% 0;
 }
 </style>
