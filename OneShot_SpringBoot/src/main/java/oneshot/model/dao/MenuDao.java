@@ -1,6 +1,7 @@
 package oneshot.model.dao;
 
 import java.util.List;
+
 import oneshot.model.dto.Menu;
 
 public interface MenuDao {
@@ -13,4 +14,6 @@ public interface MenuDao {
     int update(Menu menu);
 
     int delete(int menuId);
+
+    List<String> selectMenuType(int brandId);
 }
