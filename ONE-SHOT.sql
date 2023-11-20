@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `menu_detail` ( -- 메뉴 상세 정보를 저장하�
   `menu_detail_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '메뉴 기본 PK',
   `menu_id` INT NOT NULL COMMENT '메뉴 상세가 속한 메뉴의 id',
   `price` INT NOT NULL COMMENT '메뉴 가격',
-  `size` ENUM ('S', 'M', 'L') NOT NULL DEFAULT 'M' COMMENT '음료 온도 : ICE : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
+  `size` ENUM ('S', 'M', 'L') NOT NULL DEFAULT 'M' COMMENT '사이즈 : Small | Medium | Large',
   `size_name` VARCHAR(255) COMMENT '메뉴 사이즈의 브랜드 별 이름',
   `temperature` ENUM ('ICE', 'HOT', 'ELSE') COMMENT '음료 온도 : ICE : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴 row 생성 시각',

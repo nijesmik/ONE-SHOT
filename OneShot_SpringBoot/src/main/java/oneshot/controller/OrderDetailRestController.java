@@ -27,7 +27,7 @@ public class OrderDetailRestController {
     private OrderDetailService orderDetailService;
 
     @PostMapping("/create")
-    @ApiOperation(value = "주문 추가", notes = "새로운 주문을 추가한다")
+    @ApiOperation(value = "주문상세 추가")
     public ResponseEntity<?> createOrderDetail(@RequestBody OrderDetail orderDetail) {
         int result = orderDetailService.createOrderDetail(orderDetail);
         if (result == 0) {
@@ -37,25 +37,24 @@ public class OrderDetailRestController {
     }
 
     @GetMapping("/{orderDetailId}")
-    @ApiOperation(value = "주문 조회", notes = "주문상세를 조회한다")
+    @ApiOperation(value = "주문상세 조회")
     public ResponseEntity<?> selectOrderDetail(@PathVariable int orderDetailId) {
         OrderDetail orderDetail = orderDetailService.selectOrderDetail(orderDetailId);
         return new ResponseEntity<OrderDetail>(orderDetail, HttpStatus.OK);
     }
 
-    @PatchMapping("/{orderDetailId}")
-    @ApiOperation(value = "주문 수정", notes = "주문상세를 수정한다")
+    @PatchMapping("/update/{orderDetailId}")
+    @ApiOperation(value = "주문상세 수정")
     public ResponseEntity<?> updateOrderDetail(@PathVariable int orderDetailId, @RequestBody OrderDetail orderDetail) {
         int result = orderDetailService.updateOrderDetail(orderDetailId, orderDetail);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<Integer>(result, HttpStatus.OK);
-
     }
 
-    @DeleteMapping("/{orderDetailId}")
-    @ApiOperation(value = "주문 삭제", notes = "주문상세를 삭제한다")
+    @DeleteMapping("/delete/{orderDetailId}")
+    @ApiOperation(value = "주문상세 삭제")
     public ResponseEntity<?> deleteOrderDetail(@PathVariable int orderDetailId) {
         int result = orderDetailService.deleteOrderDetail(orderDetailId);
         if (result == 0) {

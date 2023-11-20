@@ -30,7 +30,14 @@
         FROM oneshot.order
         WHERE order_code = #{orderCode}
     </select>
-
+    
+    <update id="update" parameterMap="Order">
+        UPDATE oneshot.order
+        SET
+        service = #{service}
+        WHERE order_id = #{orderId}
+    </update>
+    
     <delete id="delete" parameterType="int">
         DELETE FROM oneshot.order
         WHERE order_id = #{orderId}

@@ -48,7 +48,7 @@ public class UserRestController {
     }
 
     @PostMapping("/signup")
-    @ApiOperation(value = "유저 회원가입", notes = "유저를 등록한다")
+    @ApiOperation(value = "유저 회원가입")
     public ResponseEntity<?> signup(@RequestBody User user) {
         int result = userService.signup(user);
         if (result == 0) {
@@ -58,7 +58,7 @@ public class UserRestController {
     }
 
     @PatchMapping("/update/{user_id}")
-    @ApiOperation(value = "회원 정보 수정")
+    @ApiOperation(value = "유저 정보 수정")
     public ResponseEntity<?> updateUser(@PathVariable(name = "user_id") int userId, @RequestBody User user) {
         int result = userService.updateUser(user, userId);
         if (result == 0) {
@@ -68,7 +68,7 @@ public class UserRestController {
     }
 
     @DeleteMapping("/delete/{user_id}")
-    @ApiOperation(value = "회원 탈퇴")
+    @ApiOperation(value = "유저 탈퇴")
     public ResponseEntity<?> deleteUser(@PathVariable(name = "user_id") int userId) {
         int result = userService.deleteUser(userId);
         if (result == 0) {

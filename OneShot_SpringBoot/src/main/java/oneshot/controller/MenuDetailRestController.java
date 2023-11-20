@@ -37,7 +37,7 @@ public class MenuDetailRestController {
     }
 
     @GetMapping("/{menuDetailId}")
-    @ApiOperation(value = "메뉴 개별 조회")
+    @ApiOperation(value = "메뉴상세 개별 조회")
     private ResponseEntity<?> selectMenuDetail(@PathVariable int menuDetailId) {
         MenuDetail menuDetail = menuDetailService.selectMenuDetail(menuDetailId);
         if (menuDetail == null) {
@@ -47,7 +47,7 @@ public class MenuDetailRestController {
     }
 
     @PatchMapping("/update/{menuDetailId}")
-    @ApiOperation(value = "메뉴 수정")
+    @ApiOperation(value = "메뉴상세 수정")
     private ResponseEntity<?> updateMenuDetail(@PathVariable int menuDetailId, @RequestBody MenuDetail menuDetail) {
         int result = menuDetailService.updateMenuDetail(menuDetailId, menuDetail);
         if (result == 0) {
@@ -57,7 +57,7 @@ public class MenuDetailRestController {
     }
 
     @DeleteMapping("/delete/{menuDetailId}")
-    @ApiOperation(value = "메뉴 삭제")
+    @ApiOperation(value = "메뉴상세 삭제")
     private ResponseEntity<?> deleteMenuDetail(@PathVariable int menuDetailId) {
         int result = menuDetailService.deleteMenuDetail(menuDetailId);
         if (result == 0) {
