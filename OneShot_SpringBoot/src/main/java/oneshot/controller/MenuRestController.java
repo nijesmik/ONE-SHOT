@@ -32,13 +32,6 @@ public class MenuRestController {
     @PostMapping("/create")
     @ApiOperation(value = "메뉴 추가")
     private ResponseEntity<?> createMenu(@RequestBody Menu menu) {
-        System.out.println("*");
-        System.out.println("*");
-        System.out.println("*");
-        System.out.println("*");
-        System.out.println("*");
-        System.out.println("*");
-        System.out.println(menu.toString());
         int result = menuService.createMenu(menu);
         if (result == 0) {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
