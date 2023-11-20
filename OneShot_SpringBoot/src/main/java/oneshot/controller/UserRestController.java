@@ -31,7 +31,7 @@ public class UserRestController {
 
     @PostMapping("/login")
     @ApiOperation(value = "유저 로그인", notes = "유저 로그인을 세션에 저장한다")
-    public ResponseEntity<?> login(User user, HttpSession session) {
+    public ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
         User tmp = userService.login(user);
         if (tmp == null) {
             return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
