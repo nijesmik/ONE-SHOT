@@ -1,6 +1,7 @@
 package oneshot.model.service;
 
 import java.util.List;
+
 import oneshot.model.dto.Menu;
 
 public interface MenuService {
@@ -14,4 +15,7 @@ public interface MenuService {
     int updateMenu(Menu menu, int menuId);
 
     int deleteMenu(int menuId);
+
+    List<String> getMenuType(int parseInt);
+
 }

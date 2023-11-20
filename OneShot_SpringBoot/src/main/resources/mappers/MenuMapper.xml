@@ -20,8 +20,15 @@
     </insert>
 
     <select id="selectByBrandId" parameterType="int" resultMap="Menu">
-        SELECT * FROM menu
-        where brand_id = #{BrandId}
+        SELECT *, d.price FROM menu m
+        LEFT JOIN menu_detail d
+        ON m.menu_id = d.menu_id 
+        WHERE m.brand_id = #{BrandId} AND d.size = "M" AND d.temperature = "ICE"
+    </select>
+    
+    <select id="selectMenuType" parameterType="int" resultType="String">
+        SELECT DISTINCT type FROM menu
+        WHERE brand_id = #{BrandId}
     </select>
 
     <select id="selectOne" resultMap="Menu">

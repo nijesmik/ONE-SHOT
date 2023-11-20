@@ -1,6 +1,8 @@
 package oneshot.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,8 +44,10 @@ public class MenuRestController {
     @GetMapping()
     @ApiOperation(value = "브랜드 메뉴 조회")
     private ResponseEntity<?> getMenuByBrandId(@RequestParam String brandId) {
+        List<String> types = null;
         List<Menu> menus = null;
         try {
+            types = menuService.getMenuType(Integer.parseInt(brandId));
             menus = menuService.getMenuByBrandId(Integer.parseInt(brandId));
         } catch (NumberFormatException e) {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -54,7 +58,10 @@ public class MenuRestController {
         if (menus.size() == 0) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Menu>>(menus, HttpStatus.OK);
+        Map<String, Object> result = new HashMap<>();
+        result.put("menuType", types);
+        result.put("menuList", menus);
+        return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
     }
 
     @GetMapping("/{menu_id}")

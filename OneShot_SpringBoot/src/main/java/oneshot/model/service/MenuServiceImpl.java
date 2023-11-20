@@ -1,10 +1,12 @@
 package oneshot.model.service;
 
 import java.util.List;
-import oneshot.model.dao.MenuDao;
-import oneshot.model.dto.Menu;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import oneshot.model.dao.MenuDao;
+import oneshot.model.dto.Menu;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -23,6 +25,11 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public List<String> getMenuType(int brandId) {
+        return menuDao.selectMenuType(brandId);
+    }
+
+    @Override
     public Menu getMenuByMenuId(int menuId) {
         return menuDao.selectOne(menuId);
     }
@@ -38,4 +45,5 @@ public class MenuServiceImpl implements MenuService {
     public int deleteMenu(int menuId) {
         return menuDao.delete(menuId);
     }
+
 }
