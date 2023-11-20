@@ -21,8 +21,7 @@ public class mammothcoffeeCrawler {
                 for (int j = 0; j < innerElements.size(); j++) {
                     img = "https://www.mmthcoffee.com" + innerElements.get(j).select(".img_wrap > img").attr("src");
                     menuName = innerElements.get(j).select("strong").text();
-                    query.append(
-                            String.format("(\"2\", \"%s\", \"%s\", null, null, null, \"%s\"),", menuName, img, type));
+                    query.append(String.format("(\"2\", \"%s\", \"%s\", \"%s\"),", menuName, img, type));
                 }
             }
             try {

@@ -28,6 +28,7 @@ public class starbucksCrawler {
                 Iterator<String> iter = menu.keySet().iterator();
                 String menuName = null;
                 String img = null;
+                String type = null;
                 while (iter.hasNext()) {
                     String key = iter.next();
                     String value = String.valueOf(menu.get(key));
@@ -35,10 +36,12 @@ public class starbucksCrawler {
                         menuName = value;
                     } else if (key.equals("file_PATH")) {
                         img = "https://www.starbucks.co.kr" + value;
+                    } else if (key.equals("cate_NAME")) {
+                        type = value;
                     }
                 }
                 if (menuName != null && img != null) {
-                    query.append(String.format("(\"1\", \"%s\", \"%s\", null, null, null, null),", menuName, img));
+                    query.append(String.format("(\"1\", \"%s\", \"%s\", \"%s\"),", menuName, img, type));
                 }
             }
             try {

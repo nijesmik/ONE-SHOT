@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `menu` ( -- 메뉴 정보를 저장하는 테이블 |
   `brand_id` INT NOT NULL COMMENT '메뉴가 속한 브랜드의 id',
   `menu_name` VARCHAR(255) NOT NULL UNIQUE COMMENT '메뉴 이름',
   `img` VARCHAR(255) NOT NULL COMMENT '메뉴 이미지',
-  `type` ENUM ('COFFEE', 'DECAFFEINE', 'ELSE') COMMENT '메뉴 타입 : COFFEE : 커피 | DECAFFEINE : 디카페인 | ELSE : 기타',
+  `type`  VARCHAR(255) COMMENT '메뉴 종류',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 메뉴 row 수정 시각',
   CONSTRAINT `fk_menu_brand_id` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`) -- 브랜드id 외래키
