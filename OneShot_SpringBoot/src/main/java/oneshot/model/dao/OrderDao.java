@@ -9,5 +9,7 @@ public interface OrderDao {
 
     Order selectByOrderCode(String orderCode);
 
+    int update(int orderId);
+
     int delete(int orderId);
 }

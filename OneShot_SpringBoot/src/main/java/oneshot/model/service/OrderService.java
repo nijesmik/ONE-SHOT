@@ -10,5 +10,7 @@ public interface OrderService {
 
     Order getOrder(String orderCode);
 
+    int updateOrder(int orderId, Order order);
+
     int deleteOrder(int orderId);
 }
