@@ -7,6 +7,8 @@ public interface UserService {
 
     int signup(User user);
 
+    int idCheck(String email);
+
     int updateUser(User user, int userId);
 
     int deleteUser(int userId);

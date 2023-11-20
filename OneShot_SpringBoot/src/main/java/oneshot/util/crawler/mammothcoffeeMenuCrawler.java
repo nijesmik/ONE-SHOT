@@ -22,6 +22,7 @@ public class mammothcoffeeMenuCrawler {
                 for (int j = 0; j < innerElements.size(); j++) {
                     img = "https://www.mmthcoffee.com" + innerElements.get(j).select(".img_wrap > img").attr("src");
                     menuName = innerElements.get(j).select("strong").text();
+                    System.out.println(innerElements.get(j).select(".eng").text());
                     query.append(String.format("(%d, \"%s\", \"%s\", \"%s\"),", brandId, menuName, img, type));
                 }
             }
