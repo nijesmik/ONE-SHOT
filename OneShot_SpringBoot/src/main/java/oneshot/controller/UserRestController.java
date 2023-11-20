@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -43,7 +44,6 @@ public class UserRestController {
     @GetMapping("/logout")
     @ApiOperation(value = "유저 로그아웃", notes = "유저 로그인을 세션에서 삭제한다")
     public ResponseEntity<?> logout(HttpSession session) {
-        session.removeAttribute("loginUser"); // TODO : "loginUser" 추후에 변경
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
@@ -55,6 +55,16 @@ public class UserRestController {
             return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
+    }
+
+    @GetMapping()
+    @ApiOperation(value = "유저 조회")
+    public ResponseEntity<?> idCheck(@RequestParam String email) {
+        int result = userService.idCheck(email);
+        if (result == 1) {
+            return new ResponseEntity<Integer>(result, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<Integer>(result, HttpStatus.OK);
     }
 
     @PatchMapping("/update/{user_id}")

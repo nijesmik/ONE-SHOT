@@ -9,7 +9,10 @@ public interface UserDao {
 
     User selectByUserId(int userId);
 
+    int idCheck(String email);
+
     int update(User user);
 
     int delete(int userId);
+
 }
