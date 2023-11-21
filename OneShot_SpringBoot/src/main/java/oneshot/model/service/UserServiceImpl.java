@@ -1,5 +1,7 @@
 package oneshot.model.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,10 +16,11 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User login(User inputUser) {
+    public User login(User inputUser, HttpSession session) {
         User savedUser = userDao.selectByEmail(inputUser.getEmail());
         if (savedUser != null && savedUser.ComparePassword(inputUser)) {
             savedUser.setPassword("******");
+            session.setAttribute("loginUser", savedUser); // TODO : "loginUser" 추후에 변경
             return savedUser;
         }
         return null;

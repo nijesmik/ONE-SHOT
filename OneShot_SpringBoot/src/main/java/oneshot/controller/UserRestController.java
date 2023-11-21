@@ -33,17 +33,17 @@ public class UserRestController {
     @PostMapping("/login")
     @ApiOperation(value = "유저 로그인", notes = "유저 로그인을 세션에 저장한다")
     public ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
-        User tmp = userService.login(user);
+        User tmp = userService.login(user, session);
         if (tmp == null) {
             return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
         }
-        session.setAttribute("loginUser", tmp); // TODO : "loginUser" 추후에 변경
         return new ResponseEntity<User>(tmp, HttpStatus.OK);
     }
 
     @GetMapping("/logout")
     @ApiOperation(value = "유저 로그아웃", notes = "유저 로그인을 세션에서 삭제한다")
     public ResponseEntity<?> logout(HttpSession session) {
+        session.invalidate();
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
