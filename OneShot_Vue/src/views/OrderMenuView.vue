@@ -1,4 +1,6 @@
 <template>
+	<MenuDetailModal />
+
 	<ShareUrl :url="shareUrl" />
 
 	<div class="type mb-3">
