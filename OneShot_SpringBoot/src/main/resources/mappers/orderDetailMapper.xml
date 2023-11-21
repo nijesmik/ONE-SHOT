@@ -5,21 +5,20 @@
 <mapper namespace="oneshot.model.dao.OrderDetailDao">
     
     <resultMap id="OrderDetail" type="OrderDetail">
-      <result column="order_detail_id" property="orderDetailId"/>
-      <result column="order_id" property="orderId"/>
-      <result column="menu_id" property="menuId"/>
-      <result column="order_user" property="orderUser"/>
-      <result column="amount" property="amount"/>
-      <result column="created_time" property="createdTime"/>
-      <result column="updated_time" property="updatedTime"/>
+        <result column="order_detail_id" property="orderDetailId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="menu_id" property="menuId"/>
+        <result column="amount" property="amount"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="updated_time" property="updatedTime"/>
     </resultMap>
     
     <parameterMap type="OrderDetail" id="OrderDetail"/>
 
     <insert id="createOrderDetail" parameterType="OrderDetail">
         INSERT INTO order_detail
-        (order_id, menu_detail_id, order_user, amount)
-        VALUES (#{orderId}, #{menuDetailId}, #{orderUser}, #{amount})
+        (order_id, menu_detail_id, name, amount)
+        VALUES (#{orderId}, #{menuDetailId}, #{name}, #{amount})
     </insert>
 
     <select id="selectByOrderId" parameterType="int" resultMap="OrderDetail">

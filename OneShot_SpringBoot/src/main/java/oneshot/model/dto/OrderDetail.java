@@ -7,7 +7,7 @@ public class OrderDetail {
     private int OrderDetailId;
     private int orderId;
     private int menuDetailId;
-    private String orderUser;
+    private String name;
     private int amount;
     private String createdTime;
     private String updatedTime;
@@ -39,12 +39,12 @@ public class OrderDetail {
         this.menuDetailId = menuDetailId;
     }
 
-    public String getOrderUser() {
-        return orderUser;
+    public String getName() {
+        return name;
     }
 
-    public void setOrderUser(String orderUser) {
-        this.orderUser = orderUser;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAmount() {
@@ -74,7 +74,7 @@ public class OrderDetail {
     @Override
     public String toString() {
         return "OrderDetail [OrderDetailId=" + OrderDetailId + ", orderId=" + orderId + ", MenuDetailId=" + menuDetailId
-                + ", orderUser=" + orderUser + ", amount=" + amount + ", createdTime=" + createdTime + ", updatedTime="
+                + ", name=" + name + ", amount=" + amount + ", createdTime=" + createdTime + ", updatedTime="
                 + updatedTime + "]";
     }
 
