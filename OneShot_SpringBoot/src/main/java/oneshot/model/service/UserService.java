@@ -1,9 +1,11 @@
 package oneshot.model.service;
 
+import javax.servlet.http.HttpSession;
+
 import oneshot.model.dto.User;
 
 public interface UserService {
-    User login(User user);
+    User login(User user, HttpSession session);
 
     int signup(User user);
 

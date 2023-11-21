@@ -13,7 +13,7 @@ import org.jsoup.select.Elements;
 
 public class starbucksMenuCrawler {
     static int rs = 0;
-    static int brandId = 1;
+    static int brandId = 2;
 
     public static void starbucksMenuCrawling(String menuTabCode) {
         try {

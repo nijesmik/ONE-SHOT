@@ -22,29 +22,22 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS `brand` ( -- 브랜드 정보를 저장하는 테이블
   `brand_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '브랜드 기본 PK',
-  `brand_name` VARCHAR(255) NOT NULL COMMENT '브랜드 이름',
+  `brand_name` VARCHAR(255) NOT NULL UNIQUE COMMENT '브랜드 이름',
   `logo` VARCHAR(255) NOT NULL COMMENT '브랜드 로고',
   `brand_url` VARCHAR(255) COMMENT '브랜드 공식 홈페이지 url',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '브랜드 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 브랜드 row 수정 시각'
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
-INSERT INTO brand
-(brand_name, logo, brand_url)
-VALUES
-("스타벅스", "https://i.namu.wiki/i/9p8OVxJTce_f2HnuZF1QOU6qMSHqXBHdkcx3q_hlGxvhcyaOXKxBVyoDkeg-Cb4Nx2p60W0AUh6RzjAH59vHwQ.svg", "https://www.starbucks.co.kr"),
-("메머드커피", "https://www.mmthcoffee.com/img/common/f_logo.png", "https://www.mmthcoffee.com"),
-("바나프레소", "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/logo/h_logo_3138e3904929.png", "https://banapresso.com")
-;
-
 CREATE TABLE IF NOT EXISTS `menu` ( -- 메뉴 정보를 저장하는 테이블 | 브랜드에 귀속
   `menu_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '메뉴 기본 PK',
   `brand_id` INT NOT NULL COMMENT '메뉴가 속한 브랜드의 id',
-  `menu_name` VARCHAR(255) NOT NULL UNIQUE COMMENT '메뉴 이름',
+  `menu_name` VARCHAR(255) NOT NULL COMMENT '메뉴 이름',
   `img` VARCHAR(255) NOT NULL COMMENT '메뉴 이미지',
   `type`  VARCHAR(255) COMMENT '메뉴 종류',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 메뉴 row 수정 시각',
+  UNIQUE KEY (`brand_id`, `menu_name`),
   CONSTRAINT `fk_menu_brand_id` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`) -- 브랜드id 외래키
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
@@ -65,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `order` ( -- 개별 주문의 종합 결과 주문서
   `order_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '주문서 기본 PK',
   `user_id` INT NOT NULL COMMENT '주문서 생성 유저 | 비회원일 경우 고정값을 가짐',
   `brand_id` INT NOT NULL COMMENT '주문하는 브랜드 id',
-  `order_code` VARCHAR(255) NOT NULL COMMENT '주문서 공유 url',
+  `order_code` VARCHAR(255) NOT NULL UNIQUE COMMENT '주문서 공유 url',
   `service` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '주문서 서비스 종료 여부 : 0 종료 안됨 | 1 종료됨',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '주문서 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 주문서 row 수정 시각',
