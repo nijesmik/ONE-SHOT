@@ -49,14 +49,14 @@ CREATE TABLE IF NOT EXISTS `menu` ( -- 메뉴 정보를 저장하는 테이블 |
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `menu_detail` ( -- 메뉴 상세 정보를 저장하는 테이블 | 메뉴에 귀속
-  `menu_detail_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '메뉴 기본 PK',
+  `menu_detail_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '메뉴상세 기본 PK',
   `menu_id` INT NOT NULL COMMENT '메뉴 상세가 속한 메뉴의 id',
-  `price` INT NOT NULL COMMENT '메뉴 가격',
-  `size` ENUM ('S', 'M', 'L') NOT NULL DEFAULT 'M' COMMENT '사이즈 : S | Medium | Large',
+  `price` INT NOT NULL COMMENT '해당 메뉴의 가격',
+  `size` ENUM ('S', 'M', 'L') NOT NULL DEFAULT 'M' COMMENT '사이즈 : Small | Medium | Large',
   `size_name` VARCHAR(255) COMMENT '메뉴 사이즈의 브랜드 별 이름',
   `temperature` ENUM ('ICE', 'HOT', 'ELSE') COMMENT '음료 온도 : ICE : 차가운 음료 | HOT : 뜨거운 음료 | ELSE : 기타',
-  `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴 row 생성 시각',
-  `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 메뉴 row 수정 시각',
+  `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴상세 row 생성 시각',
+  `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 메뉴상세 row 수정 시각',
   UNIQUE KEY (`menu_id`, `size`, `temperature`),
   CONSTRAINT `fk_menu_detail_id` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) -- 메뉴id 외래키
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
@@ -76,13 +76,13 @@ CREATE TABLE IF NOT EXISTS `order` ( -- 개별 주문의 종합 결과 주문서
 CREATE TABLE IF NOT EXISTS `order_detail` ( -- 개별 주문 정보 테이블 | 주문서에 귀속
   `order_detail_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '주문 기본 PK',
   `order_id` INT NOT NULL COMMENT '주문이 속한 주문서의 id',
-  `menu_id` INT NOT NULL COMMENT '주문에 해당하는 메뉴의 id',
+  `menu_detail_id` INT NOT NULL COMMENT '주문에 해당하는 메뉴상세 의 id',
   `name` VARCHAR(255) NOT NULL COMMENT '주문을 실시한 사용자 이름',
   `amount` INT NOT NULL DEFAULT 1 COMMENT '주문 내역에 속한 메뉴의 개수',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '주문 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 주문 row 수정 시각',
-  CONSTRAINT `fk_detail_order_id` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`), -- 주문서id 외래키
-  CONSTRAINT `fk_detail_menu_id` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) -- 메뉴id 외래키
+  CONSTRAINT `fk_orderdetail_order_id` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`), -- 주문서id 외래키
+  CONSTRAINT `fk_orderdetail_menudetail_id` FOREIGN KEY (`menu_detail_id`) REFERENCES `menu_detail` (`menu_detail_id`) -- 메뉴id 외래키
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 commit;

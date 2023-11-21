@@ -18,8 +18,8 @@
 
     <insert id="createOrderDetail" parameterType="OrderDetail">
         INSERT INTO order_detail
-        (order_id, menu_id, order_user, amount)
-        VALUES (#{orderId}, #{menuId}, #{orderUser}, #{amount})
+        (order_id, menu_detail_id, order_user, amount)
+        VALUES (#{orderId}, #{menuDetailId}, #{orderUser}, #{amount})
     </insert>
 
     <select id="selectByOrderId" parameterType="int" resultMap="OrderDetail">

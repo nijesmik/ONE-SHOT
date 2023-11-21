@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModel;
 public class OrderDetail {
     private int OrderDetailId;
     private int orderId;
-    private int menuId;
+    private int menuDetailId;
     private String orderUser;
     private int amount;
     private String createdTime;
@@ -31,12 +31,12 @@ public class OrderDetail {
         this.orderId = orderId;
     }
 
-    public int getMenuId() {
-        return menuId;
+    public int getMenuDetailId() {
+        return menuDetailId;
     }
 
-    public void setMenuId(int menuId) {
-        this.menuId = menuId;
+    public void setMenuDetailId(int menuDetailId) {
+        this.menuDetailId = menuDetailId;
     }
 
     public String getOrderUser() {
@@ -73,7 +73,7 @@ public class OrderDetail {
 
     @Override
     public String toString() {
-        return "OrderDetail [OrderDetailId=" + OrderDetailId + ", orderId=" + orderId + ", menuId=" + menuId
+        return "OrderDetail [OrderDetailId=" + OrderDetailId + ", orderId=" + orderId + ", MenuDetailId=" + menuDetailId
                 + ", orderUser=" + orderUser + ", amount=" + amount + ", createdTime=" + createdTime + ", updatedTime="
                 + updatedTime + "]";
     }
