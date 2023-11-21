@@ -1,22 +1,18 @@
 <template>
-	<ShareUrl :url="share_url" />
+	<ShareUrl :url="shareUrl" />
 
 	<div class="type mb-3">
 		<button
 			class="btn btn-outline-info btn-sm"
 			v-for="type in menuTypes"
-			@click.prevent="selectType(type)"
+			@click.prevent="clickType(type)"
 		>
 			{{ type }}
 		</button>
 	</div>
 
 	<div class="list">
-		<div
-			v-for="menu in computedMenus"
-			class="menu select mb-3"
-			@click="selectMenu(menu)"
-		>
+		<div v-for="menu in computedMenus" class="item mb-3">
 			<Menu :menu="menu" />
 		</div>
 	</div>
@@ -26,27 +22,29 @@
 import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useUrlStore } from "@/stores/url";
+import { useMenuStore } from "@/stores/menu";
 import axios from "axios";
 import Menu from "@/components/Menu.vue";
 import ShareUrl from "@/components/ShareUrl.vue";
+import MenuDetailModal from "../components/MenuDetailModal.vue";
 
 const URL = useUrlStore();
+const menuStore = useMenuStore();
 const route = useRoute();
 const router = useRouter();
 const orderCode = route.params.orderCode;
 
-const share_url = ref(`${URL.DOMAIN}/order/${orderCode}`);
+const shareUrl = ref(`${URL.DOMAIN}/order/${orderCode}`);
 const order = ref({});
 const orderDetails = ref([]);
 const menuTypes = ref([]);
 const menus = ref([]);
 
-const typeSelected = ref("");
-const selectType = (type) => {
-	typeSelected.value = type;
+const clickType = (type) => {
+	menuStore.type = type;
 };
 const computedMenus = computed(() => {
-	return menus.value.filter((menu) => menu.type === typeSelected.value);
+	return menus.value.filter((menu) => menu.type === menuStore.type);
 });
 
 axios
@@ -57,7 +55,7 @@ axios
 		axios.get(`${URL.API.MENU}?brandId=${order.value.brandId}`).then((res) => {
 			menuTypes.value = res.data.menuType;
 			menus.value = res.data.menuList;
-			typeSelected.value = menuTypes.value[0];
+			menuStore.type = menuTypes.value[0];
 		});
 	})
 	.catch((err) => {
@@ -66,10 +64,6 @@ axios
 			router.push({ name: "home" });
 		}
 	});
-
-const selectMenu = (menu) => {
-	alert("TODO : 사이즈, ice/hot 선택 모달 띄우기");
-};
 </script>
 <!-- --------------------------------------------------------------- -->
 <style scoped>
