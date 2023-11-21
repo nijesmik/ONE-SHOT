@@ -4,13 +4,7 @@
 	<ShareUrl :url="shareUrl" />
 
 	<div class="type mb-3">
-		<button
-			class="btn btn-outline-info btn-sm"
-			v-for="type in menuTypes"
-			@click.prevent="clickType(type)"
-		>
-			{{ type }}
-		</button>
+		<MenuTypeBtn v-for="menuType in menuTypes" :type="menuType" />
 	</div>
 
 	<div class="list">
@@ -29,6 +23,7 @@ import axios from "axios";
 import Menu from "@/components/Menu.vue";
 import ShareUrl from "@/components/ShareUrl.vue";
 import MenuDetailModal from "../components/MenuDetailModal.vue";
+import MenuTypeBtn from "@/components/MenuTypeBtn.vue";
 
 const URL = useUrlStore();
 const menuStore = useMenuStore();
@@ -42,9 +37,6 @@ const orderDetails = ref([]);
 const menuTypes = ref([]);
 const menus = ref([]);
 
-const clickType = (type) => {
-	menuStore.type = type;
-};
 const computedMenus = computed(() => {
 	return menus.value.filter((menu) => menu.type === menuStore.type);
 });
@@ -53,6 +45,7 @@ axios
 	.get(`${URL.API.ORDER}?orderCode=${orderCode}`)
 	.then((res) => {
 		order.value = res.data.order;
+		menuStore.orderId = order.value.orderId;
 		orderDetails.value = res.data.orderDetail;
 		axios.get(`${URL.API.MENU}?brandId=${order.value.brandId}`).then((res) => {
 			menuTypes.value = res.data.menuType;
