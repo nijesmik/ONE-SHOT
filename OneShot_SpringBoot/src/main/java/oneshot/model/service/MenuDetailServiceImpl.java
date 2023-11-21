@@ -1,5 +1,7 @@
 package oneshot.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class MenuDetailServiceImpl implements MenuDetailService {
     @Override
     public int createMenuDetail(MenuDetail menuDetail) {
         return menuDetailDao.createMenuDetail(menuDetail);
+    }
+
+    @Override
+    public List<MenuDetail> selectAllMenuDetail(int menuId) {
+        return menuDetailDao.selectAllMenuDetail(menuId);
     }
 
     @Override

@@ -21,6 +21,12 @@
         (menu_id, price, size, size_name, temperature)
         VALUES (#{menuId}, #{price}, #{size}, #{sizeName}, #{temperature})
     </insert>
+    
+    <select id="selectAllMenuDetail" parameterType="int" resultMap="MenuDetail">
+        SELECT *
+        FROM menu_detail
+        WHERE menu_id = #{menuId}
+    </select>
 
     <select id="selectMenuDetail" parameterType="int" resultMap="MenuDetail">
         SELECT *
