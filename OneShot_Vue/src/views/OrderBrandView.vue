@@ -2,7 +2,7 @@
 	<div class="list">
 		<div
 			v-for="brand in brands"
-			class="brand select"
+			class="item"
 			@click="selectBrand(brand)"
 		>
 			<Brand :brand="brand" />

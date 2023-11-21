@@ -20,7 +20,7 @@
 	align-items: center;
 }
 
-.select {
+.item {
 	padding: 2%;
 	border: 1px solid #dee2e6;
 	border-radius: var(--bs-border-radius-sm);
