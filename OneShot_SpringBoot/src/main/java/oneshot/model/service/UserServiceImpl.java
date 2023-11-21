@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
     public User login(User inputUser) {
         User savedUser = userDao.selectByEmail(inputUser.getEmail());
         if (savedUser != null && savedUser.ComparePassword(inputUser)) {
+            savedUser.setPassword("******");
             return savedUser;
         }
         return null;
