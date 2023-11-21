@@ -13,16 +13,17 @@
 }
 
 .wrapper {
-	margin-top: 5%;
+	width: 90%;
+	margin: 5% auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.select {
+.item {
 	padding: 2%;
 	border: 1px solid #dee2e6;
-	border-radius: 0.375rem;
+	border-radius: var(--bs-border-radius-sm);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -31,7 +32,7 @@
 }
 
 .list {
-	width: 90%;
+	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
