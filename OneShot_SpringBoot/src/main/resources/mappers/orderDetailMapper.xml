@@ -8,6 +8,8 @@
         <result column="order_detail_id" property="orderDetailId"/>
         <result column="order_id" property="orderId"/>
         <result column="menu_detail_id" property="menuDetailId"/>
+        <result column="size_name" property="sizeName"/>
+        <result column="menu_name" property="menuName"/>
         <result column="amount" property="amount"/>
         <result column="created_time" property="createdTime"/>
         <result column="updated_time" property="updatedTime"/>
@@ -22,8 +24,15 @@
     </insert>
 
     <select id="selectByOrderId" parameterType="int" resultMap="OrderDetail">
-        SELECT *
-        FROM order_detail
+                USE oneshot;
+        SELECT o.order_detail_id, o.order_id, o.menu_detail_id
+        , o.name, o.amount, o.created_time, o.updated_time
+        , m.price AS unitPrice, m.size, m.size_name, m.temperature
+        , (SELECT menu_name FROM menu WHERE menu_id = m.menu_id) AS menu_name
+        , (SELECT img FROM menu WHERE menu_id = m.menu_id) AS img
+        FROM order_detail o
+        INNER JOIN menu_detail m
+        ON o.menu_detail_id = m.menu_detail_id
         WHERE order_id = #{orderId}
     </select>
     

@@ -9,6 +9,12 @@ public class OrderDetail {
     private int menuDetailId;
     private String name;
     private int amount;
+    private String menuName;
+    private String img;
+    private int unitPrice;
+    private String size;
+    private String sizeName;
+    private String temperature;
     private String createdTime;
     private String updatedTime;
 
@@ -55,6 +61,54 @@ public class OrderDetail {
         this.amount = amount;
     }
 
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public int getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(int unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getSizeName() {
+        return sizeName;
+    }
+
+    public void setSizeName(String sizeName) {
+        this.sizeName = sizeName;
+    }
+
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
+    }
+
     public String getCreatedTime() {
         return createdTime;
     }
@@ -73,9 +127,10 @@ public class OrderDetail {
 
     @Override
     public String toString() {
-        return "OrderDetail [OrderDetailId=" + OrderDetailId + ", orderId=" + orderId + ", MenuDetailId=" + menuDetailId
-                + ", name=" + name + ", amount=" + amount + ", createdTime=" + createdTime + ", updatedTime="
-                + updatedTime + "]";
+        return "OrderDetail [OrderDetailId=" + OrderDetailId + ", orderId=" + orderId + ", menuDetailId=" + menuDetailId
+                + ", name=" + name + ", amount=" + amount + ", menuName=" + menuName + ", img=" + img + ", unitPrice="
+                + unitPrice + ", size=" + size + ", sizeName=" + sizeName + ", temperature=" + temperature
+                + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
     }
 
 }
