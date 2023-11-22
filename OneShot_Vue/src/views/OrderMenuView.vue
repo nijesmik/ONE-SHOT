@@ -1,23 +1,19 @@
 <template>
-	<MenuDetailModal />
-
 	<ShareUrl :url="shareUrl" />
 
-	<div class="type mb-3">
-		<button
-			class="btn btn-outline-info btn-sm"
-			v-for="type in menuTypes"
-			@click.prevent="clickType(type)"
-		>
-			{{ type }}
-		</button>
-	</div>
+	<MenuTypeBtn :types="menuTypes" />
 
-	<div class="list">
-		<div v-for="menu in computedMenus" class="item mb-3">
-			<Menu :menu="menu" />
-		</div>
-	</div>
+	<!-- <div class="list"> -->
+
+	<v-row>
+		<template v-for="menu in computedMenus">
+			<v-col cols="2">
+				<Menu :menu="menu" />
+			</v-col>
+		</template>
+	</v-row>
+
+	<!-- </div> -->
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>
@@ -28,7 +24,7 @@ import { useMenuStore } from "@/stores/menu";
 import axios from "axios";
 import Menu from "@/components/Menu.vue";
 import ShareUrl from "@/components/ShareUrl.vue";
-import MenuDetailModal from "../components/MenuDetailModal.vue";
+import MenuTypeBtn from "@/components/MenuTypeBtn.vue";
 
 const URL = useUrlStore();
 const menuStore = useMenuStore();
@@ -42,9 +38,6 @@ const orderDetails = ref([]);
 const menuTypes = ref([]);
 const menus = ref([]);
 
-const clickType = (type) => {
-	menuStore.type = type;
-};
 const computedMenus = computed(() => {
 	return menus.value.filter((menu) => menu.type === menuStore.type);
 });
@@ -53,6 +46,7 @@ axios
 	.get(`${URL.API.ORDER}?orderCode=${orderCode}`)
 	.then((res) => {
 		order.value = res.data.order;
+		menuStore.orderId = order.value.orderId;
 		orderDetails.value = res.data.orderDetail;
 		axios.get(`${URL.API.MENU}?brandId=${order.value.brandId}`).then((res) => {
 			menuTypes.value = res.data.menuType;
