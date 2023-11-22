@@ -9,7 +9,9 @@ public class Menu {
     private String menuName;
     private String img;
     private String type;
-    private String price;
+    private int defaultPrice;
+    private String defaultSize;
+    private String defaultSizeName;
     private String createdTime;
     private String updatedTime;
 
@@ -48,12 +50,28 @@ public class Menu {
         this.type = type;
     }
 
-    public String getPrice() {
-        return price;
+    public int getDefaultPrice() {
+        return defaultPrice;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setDefaultPrice(int defaultPrice) {
+        this.defaultPrice = defaultPrice;
+    }
+
+    public String getDefaultSize() {
+        return defaultSize;
+    }
+
+    public void setDefaultSize(String defaultSize) {
+        this.defaultSize = defaultSize;
+    }
+
+    public String getDefaultSizeName() {
+        return defaultSizeName;
+    }
+
+    public void setDefaultSizeName(String defaultSizeName) {
+        this.defaultSizeName = defaultSizeName;
     }
 
     public String getCreatedTime() {
@@ -96,7 +114,8 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu [menuId=" + menuId + ", brandId=" + brandId + ", menuName=" + menuName + ", img=" + img + ", type="
-                + type + ", price=" + price + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+                + type + ", defaultPrice=" + defaultPrice + ", defaultSize=" + defaultSize + ", defaultSizeName="
+                + defaultSizeName + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
     }
 
 }

@@ -34,6 +34,14 @@
         WHERE menu_detail_id = #{menuDetailId}
     </select>
     
+    <select id="selectBrandMenuDetail" parameterType="int" resultMap="MenuDetail">
+        SELECT d.menu_detail_id, d.menu_id, d.price, d.size, d.size_name FROM menu_detail d
+        INNER JOIN menu m
+        ON d.menu_id = m.menu_id
+        WHERE m.brand_id = #{brandId}
+        GROUP BY d.menu_id, d.size;
+    </select>
+    
     <update id="updateMenuDetail" parameterMap="MenuDetail">
         UPDATE menu_detail
         SET
