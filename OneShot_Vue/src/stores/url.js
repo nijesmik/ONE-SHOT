@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
 export const useUrlStore = defineStore("url", () => {
-	const DOMAIN = "http://localhost:8080";
+	const DOMAIN = "http://54.180.122.15:8080";
 	const _API = `${DOMAIN}/api`;
   const _USER = `${_API}/user`;
 	const _ORDER = `${_API}/order`;
