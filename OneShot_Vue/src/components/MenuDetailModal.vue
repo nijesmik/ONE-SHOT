@@ -29,18 +29,15 @@
 			</template>
 		</v-chip-group>
 	</v-card-text>
-
 	<MenuDetailModalAmount />
-	<v-card-text>
-		<MenuDetailModalSubmit />
-	</v-card-text>
+	<MenuDetailModalSubmit />
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>
 import axios from "axios";
 import { useMenuStore } from "@/stores/menu";
 import { useUrlStore } from "@/stores/url";
-import { ref, defineProps } from "vue";
+import { ref, defineProps, watch } from "vue";
 import MenuDetailModalAmount from "@/components/MenuDetailModalAmount.vue";
 import MenuDetailModalSubmit from "@/components/MenuDetailModalSubmit.vue";
 
@@ -53,35 +50,43 @@ const URL = useUrlStore();
 const menuDetails = ref([]);
 const temperatures = ref([]);
 const sizes = ref([]);
+const temperatureSelection = ref(0);
+const sizeSelection = ref(0);
+const setMenuDetail = () => {
+	menuStore.menuDetail = menuDetails.value.filter(
+		(detail) =>
+			detail.temperature === menuStore.temperature &&
+			detail.sizeName === menuStore.size
+	)[0];
+};
 
 axios.get(`${URL.API.MENU_DETAIL}?menuId=${props.menu.menuId}`).then((res) => {
 	menuDetails.value = res.data;
-	temperatures.value = new Set(
-		menuDetails.value.map((detail) => detail.temperature)
-	);
-	sizes.value = new Set(menuDetails.value.map((detail) => detail.size));
+	temperatures.value = [
+		...new Set(menuDetails.value.map((detail) => detail.temperature)),
+	];
+	menuStore.temperature = temperatures.value[0];
+	sizes.value = [
+		...new Set(menuDetails.value.map((detail) => detail.sizeName)),
+	];
+	sizes.value.forEach((size, idx, _) => {
+		if (size === props.menu.defaultSizeName) {
+			sizeSelection.value = idx;
+		}
+	});
+	menuStore.size = sizes.value[sizeSelection.value];
+	setMenuDetail();
 });
 
-const temperatureSelection = ref(0);
-const sizeSelection = ref(1);
+watch(temperatureSelection, (idx) => {
+	menuStore.temperature = temperatures.value[idx];
+	setMenuDetail();
+});
 
-const clickTemperature = (temperature) => {
-	menuStore.temperature = temperature;
-	menuStore.menuDetail = menuDetails.value.filter(
-		(detail) =>
-			detail.temperature === menuStore.temperature &&
-			detail.size === menuStore.size
-	)[0];
-};
-
-const clickSize = (size) => {
-	menuStore.size = size;
-	menuStore.menuDetail = menuDetails.value.filter(
-		(detail) =>
-			detail.temperature === menuStore.temperature &&
-			detail.size === menuStore.size
-	)[0];
-};
+watch(sizeSelection, (idx) => {
+	menuStore.size = sizes.value[idx];
+	setMenuDetail();
+});
 </script>
 <!-- --------------------------------------------------------------- -->
 <style scoped></style>

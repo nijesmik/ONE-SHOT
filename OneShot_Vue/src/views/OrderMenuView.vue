@@ -1,19 +1,15 @@
 <template>
-	<ShareUrl :url="shareUrl" />
-
-	<MenuTypeBtn :types="menuTypes" />
-
-	<!-- <div class="list"> -->
-
-	<v-row>
-		<template v-for="menu in computedMenus">
-			<v-col cols="2">
-				<Menu :menu="menu" />
-			</v-col>
-		</template>
-	</v-row>
-
-	<!-- </div> -->
+	<v-container>
+		<ShareUrl :url="shareUrl" />
+		<MenuTypeBtn :types="menuTypes" />
+		<v-row>
+			<template v-for="menu in computedMenus">
+				<v-col cols="2">
+					<Menu :menu="menu" />
+				</v-col>
+			</template>
+		</v-row>
+	</v-container>
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>

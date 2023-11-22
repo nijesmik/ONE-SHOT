@@ -1,26 +1,18 @@
 <template>
-	<div class="input-group mb-3">
-		<input
-			type="text"
-			class="form-control"
-			placeholder="주문하실 분의 이름을 입력해 주세요"
-			aria-label="Recipient's username"
-			aria-describedby="button-addon2"
+	<v-card-text>
+		<v-text-field
+			:rules="rules"
+			label="Name"
 			v-model="name"
-		/>
-		<button
-			class="btn btn-outline-secondary"
-			type="button"
-			id="button-addon2"
-			@click.prevent="order"
-		>
-			Submit
-		</button>
-	</div>
+			class="mb-3"
+		></v-text-field>
+		<v-btn color="primary" block @click.prevent="order">order</v-btn>
+	</v-card-text>
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>
 import axios from "axios";
+import { useRouter, useRoute } from "vue-router";
 import { ref, defineProps } from "vue";
 import { useUrlStore } from "@/stores/url";
 import { useMenuStore } from "@/stores/menu";
@@ -28,13 +20,23 @@ import { useMenuStore } from "@/stores/menu";
 const URL = useUrlStore();
 const menuStore = useMenuStore();
 const name = ref("");
+const router = useRouter();
+const route = useRoute();
+
+const rules = ref([
+	(v) => !!v || "Required.",
+	(v) => (v && v.length <= 10) || "Name must be less than 10 characters.",
+]);
 
 defineProps({
 	menuDetailId: Number,
 });
 
 const order = () => {
-	console.log(menuStore.menuDetail);
+	if (name.value.length < 1) {
+		alert("이름을 입력해주세요.");
+		return;
+	}
 	axios
 		.post(URL.API.ORDER_DETAIL_CREATE, {
 			orderId: menuStore.orderId,
@@ -43,7 +45,10 @@ const order = () => {
 			amount: menuStore.amount,
 		})
 		.then((res) => {
-			alert("주문 성공");
+			router.push({
+				name: "order-result",
+				params: { orderCode: route.params.orderCode },
+			});
 		})
 		.catch((err) => {
 			alert("주문 실패");

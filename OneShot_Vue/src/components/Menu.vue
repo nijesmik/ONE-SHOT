@@ -3,11 +3,11 @@
 		<v-card hover link>
 			<v-img :src="menu.img" aspect-ratio="1" cover></v-img>
 			<v-card-title>{{ menu.menuName }}</v-card-title>
-			<v-card-text>{{ menu.price }}원</v-card-text>
+			<v-card-text>{{ menu.defaultPrice }}원</v-card-text>
 		</v-card>
 
 		<v-dialog v-model="dialog" activator="parent" width="auto">
-			<v-card>
+			<v-card width="450">
 				<MenuDetailModal :menu="menu" />
 				<v-card-actions>
 					<v-btn color="red" block @click="dialog = false">Close</v-btn>
