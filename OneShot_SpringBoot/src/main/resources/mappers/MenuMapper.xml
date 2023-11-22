@@ -20,16 +20,18 @@
     </insert>
 
     <select id="selectByBrandId" parameterType="int" resultMap="Menu">
-        SELECT *, d.price FROM menu m
-        LEFT JOIN menu_detail d
-        ON m.menu_id = d.menu_id 
-        WHERE m.brand_id = #{BrandId} AND d.size = "M" AND d.temperature = "ICE" AND d.price IS NOT NULL
+        SELECT m.menu_id, m.brand_id, m.menu_name, m.img, m.type, m.created_time, m.updated_time FROM menu m
+        INNER JOIN menu_detail d
+        ON m.menu_id = d.menu_id
+        WHERE m.brand_id = #{brandId}
+        GROUP BY d.menu_id;
     </select>
     
     <select id="selectMenuType" parameterType="int" resultType="String">
-        SELECT DISTINCT m.type FROM menu_detail d
-        INNER JOIN menu m
-        WHERE m.brand_id = #{BrandId} AND d.price IS NOT NULL
+        SELECT DISTINCT m.type FROM menu m
+        INNER JOIN menu_detail d
+        ON m.menu_id = d.menu_id
+        WHERE m.brand_id = #{brandId};
     </select>
 
     <select id="selectOne" resultMap="Menu">

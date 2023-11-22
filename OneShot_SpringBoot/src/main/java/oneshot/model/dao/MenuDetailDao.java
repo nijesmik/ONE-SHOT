@@ -12,6 +12,8 @@ public interface MenuDetailDao {
 
     MenuDetail selectMenuDetail(int menuDetailId);
 
+    List<MenuDetail> selectBrandMenuDetail(int brandId);
+
     int updateMenuDetail(MenuDetail menuDetail);
 
     int deleteMenuDetail(int menuDetailId);
