@@ -24,7 +24,6 @@
     </insert>
 
     <select id="selectByOrderId" parameterType="int" resultMap="OrderDetail">
-                USE oneshot;
         SELECT o.order_detail_id, o.order_id, o.menu_detail_id
         , o.name, o.amount, o.created_time, o.updated_time
         , m.price AS unitPrice, m.size, m.size_name, m.temperature
