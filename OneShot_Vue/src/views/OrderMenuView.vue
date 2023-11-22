@@ -1,17 +1,19 @@
 <template>
-	<MenuDetailModal />
-
 	<ShareUrl :url="shareUrl" />
 
-	<div class="type mb-3">
-		<MenuTypeBtn v-for="menuType in menuTypes" :type="menuType" />
-	</div>
+	<MenuTypeBtn :types="menuTypes" />
 
-	<div class="list">
-		<div v-for="menu in computedMenus" class="item mb-3">
-			<Menu :menu="menu" />
-		</div>
-	</div>
+	<!-- <div class="list"> -->
+
+	<v-row>
+		<template v-for="menu in computedMenus">
+			<v-col cols="2">
+				<Menu :menu="menu" />
+			</v-col>
+		</template>
+	</v-row>
+
+	<!-- </div> -->
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>
@@ -22,7 +24,6 @@ import { useMenuStore } from "@/stores/menu";
 import axios from "axios";
 import Menu from "@/components/Menu.vue";
 import ShareUrl from "@/components/ShareUrl.vue";
-import MenuDetailModal from "../components/MenuDetailModal.vue";
 import MenuTypeBtn from "@/components/MenuTypeBtn.vue";
 
 const URL = useUrlStore();

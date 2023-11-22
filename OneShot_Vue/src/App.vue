@@ -1,24 +1,12 @@
 <template>
-	<div class="wrapper">
+	<v-container>
 		<router-view />
-	</div>
+	</v-container>
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup></script>
 <!-- --------------------------------------------------------------- -->
 <style>
-* {
-	margin: 0;
-	padding: 0;
-}
-
-.wrapper {
-	width: 90%;
-	margin: 5% auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
 
 .item {
 	padding: 2%;

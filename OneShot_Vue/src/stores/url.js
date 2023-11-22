@@ -6,6 +6,7 @@ export const useUrlStore = defineStore("url", () => {
 	const _API = `${DOMAIN}/api`;
   const _USER = `${_API}/user`;
 	const _ORDER = `${_API}/order`;
+	const _ORDER_DETAIL = `${_API}/order-detail`;
 	const API = {
     LOGIN: `${_USER}/login`,
 		SIGNUP: `${_USER}/signup`,
@@ -13,6 +14,8 @@ export const useUrlStore = defineStore("url", () => {
 		ORDER: _ORDER,
 		ORDER_CREATE: `${_ORDER}/create`,
     MENU: `${_API}/menu`,
+		MENU_DETAIL: `${_API}/menu-detail`,
+		ORDER_DETAIL_CREATE: `${_ORDER_DETAIL}/create`,
 	};
 
 	return { DOMAIN, API };
