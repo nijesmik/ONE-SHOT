@@ -7,7 +7,7 @@
     <resultMap id="OrderDetail" type="OrderDetail">
         <result column="order_detail_id" property="orderDetailId"/>
         <result column="order_id" property="orderId"/>
-        <result column="menu_id" property="menuId"/>
+        <result column="menu_detail_id" property="menuDetailId"/>
         <result column="amount" property="amount"/>
         <result column="created_time" property="createdTime"/>
         <result column="updated_time" property="updatedTime"/>
