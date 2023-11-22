@@ -1,13 +1,11 @@
 <template>
-	<div class="list">
-		<div
-			v-for="brand in brands"
-			class="item"
-			@click="selectBrand(brand)"
-		>
-			<Brand :brand="brand" />
-		</div>
-	</div>
+	<v-container>
+		<v-row>
+			<template v-for="brand in brands">
+				<Brand :brand="brand" @click="selectBrand(brand)" />
+			</template>
+		</v-row>
+	</v-container>
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>

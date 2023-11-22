@@ -1,8 +1,10 @@
 <template>
-	<div class="ratio ratio-1x1">
-		<img :src="brand.logo" :alt="brand.brandName" />
-	</div>
-	<h5 class="brand-name">{{ brand.brandName }}</h5>
+	<v-col cols="2">
+		<v-card hover link>
+			<v-img :src="brand.logo" aspect-ratio="1" contain></v-img>
+			<v-card-title>{{ brand.brandName }}</v-card-title>
+		</v-card>
+	</v-col>
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>
@@ -13,15 +15,4 @@ defineProps({
 });
 </script>
 <!-- --------------------------------------------------------------- -->
-<style scoped>
-img {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
-}
-
-.brand-name {
-  margin-top: 10%;
-  margin-bottom: 0;
-}
-</style>
+<style scoped></style>
