@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: oneshot
+-- Host: oneshot-database-instance.cdar65dwvpwx.ap-northeast-2.rds.amazonaws.com    Database: oneshot
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,14 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
+
+--
+-- GTID state at the beginning of the backup 
+--
+
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
 
 --
 -- Table structure for table `order`
@@ -36,7 +44,7 @@ CREATE TABLE `order` (
   KEY `fk_order_brand_id` (`brand_id`),
   CONSTRAINT `fk_order_brand_id` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`),
   CONSTRAINT `fk_order_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,8 +53,10 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES (1,1,1,'7mc19d9w42',0,'2023-11-22 05:18:33',NULL),(2,1,2,'588j56p42p',0,'2023-11-22 08:46:13',NULL),(3,1,8,'jb23719009',0,'2023-11-22 08:47:34',NULL),(4,1,1,'3e9d4e09yh',0,'2023-11-22 08:47:38',NULL),(5,1,2,'376kkr5hb8',0,'2023-11-22 08:50:10',NULL),(6,1,2,'88m8r0c45h',0,'2023-11-22 08:50:53',NULL),(7,1,2,'4nb047g64v',0,'2023-11-22 08:56:50',NULL),(8,1,2,'575h229v6u',0,'2023-11-22 08:57:45',NULL),(9,1,2,'sl3r6se4an',0,'2023-11-22 17:11:52',NULL),(10,1,1,'2kk5w866d9',0,'2023-11-23 06:23:08',NULL),(11,1,1,'ani17q2458',0,'2023-11-23 06:54:12',NULL);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -57,4 +67,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-23 14:17:59
+-- Dump completed on 2023-11-23 16:45:45
