@@ -13,9 +13,11 @@ export const useUrlStore = defineStore("url", () => {
 		BRAND: `${_API}/brand`,
 		ORDER: _ORDER,
 		ORDER_CREATE: `${_ORDER}/create`,
+		ORDER_UPDATE: `${_ORDER}/update`,
     MENU: `${_API}/menu`,
 		MENU_DETAIL: `${_API}/menu-detail`,
 		ORDER_DETAIL_CREATE: `${_ORDER_DETAIL}/create`,
+		ORDER_DETAIL_DELETE: `${_ORDER_DETAIL}/delete`,
 	};
 
 	return { DOMAIN, API };

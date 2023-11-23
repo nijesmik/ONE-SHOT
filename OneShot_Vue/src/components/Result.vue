@@ -52,7 +52,12 @@ const content = ref(
 	`${props.orderDetail.menuName} / ${props.orderDetail.temperature} / ${props.orderDetail.sizeName} / ${props.orderDetail.amount}잔`
 );
 
-const test = () => props.orderDetail.name === name;
+const test = () => {
+	if (menuStore.order.service > 0) {
+		return false;
+	}
+	return props.orderDetail.name === name;
+};
 const isMine = ref(test());
 
 const dialog = ref(false);

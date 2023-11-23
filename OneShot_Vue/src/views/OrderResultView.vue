@@ -4,7 +4,16 @@
 			<ShareUrl />
 		</div>
 		<v-card max-width="600" class="mx-auto list">
-			<span class="title">주문 내역</span>
+			<v-row class="justify-space-between">
+				<v-col class="v-col-auto">
+
+					<div class="title">주문 내역</div>
+					<div class="ml-1 total">총 주문 금액 : {{ total }}원</div>
+				</v-col>
+				<v-col class="v-col-auto d-flex align-end" v-if="isManager">
+					<OrderComplete />
+				</v-col>
+			</v-row>
 			<v-list lines="two" v-for="orderDetail in menuStore.orderDetails">
 				<Result :order-detail="orderDetail" />
 			</v-list>
@@ -13,11 +22,33 @@
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>
+import { ref, computed } from "vue";
 import { useMenuStore } from "@/stores/menu";
 import Result from "@/components/Result.vue";
 import ShareUrl from "@/components/ShareUrl.vue";
+import OrderComplete from "@/components/OrderComplete.vue";
 
 const menuStore = useMenuStore();
+const total = computed(() => {
+	let sum = 0;
+	menuStore.orderDetails.forEach((orderDetail) => {
+		sum += orderDetail.unitPrice * orderDetail.amount;
+	});
+	return sum;
+});
+
+const test = () => {
+	if (menuStore.order.service > 0) {
+		return false;
+	}
+	const userId = sessionStorage.getItem("token");
+	const orderUserId = menuStore.order.userId;
+	if (userId == orderUserId) {
+		return true;
+	}
+}
+const isManager = ref(test());
+console.log(menuStore.order);
 </script>
 <!-- --------------------------------------------------------------- -->
 <style scoped>
@@ -33,5 +64,9 @@ const menuStore = useMenuStore();
 .url {
 	max-width: 600px;
 	margin: 0 auto;
+}
+
+.total {
+	font-size: 1.1rem;
 }
 </style>
