@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
 export const useUrlStore = defineStore("url", () => {
-	const DOMAIN = "http://43.200.182.179:8080";
+	const DOMAIN = "https://oneshotserver.store";
 	const _API = `${DOMAIN}/api`;
   const _USER = `${_API}/user`;
 	const _ORDER = `${_API}/order`;
