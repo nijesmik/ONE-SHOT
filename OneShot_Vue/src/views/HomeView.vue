@@ -7,6 +7,7 @@
 				<router-link :to="{ name: 'signup' }">회원가입</router-link>
 			</template>
 			<template v-else>
+				<a id="logout" href="" @click.prevent="logout">로그아웃</a>
 				<router-link :to="{ name: 'order-brand' }">주문 하기</router-link>
 			</template>
 		</div>
@@ -16,12 +17,17 @@
 <script setup>
 import { ref } from 'vue';
 const islogin = () => {
-	if (localStorage.getItem("token")) {
+	if (sessionStorage.getItem("token")) {
 		return true;
 	}
 	return false;
 };
 const login = ref(islogin());
+
+const logout = () => {
+	sessionStorage.removeItem("token");
+	location.reload();
+};
 
 </script>
 <!-- --------------------------------------------------------------- -->
