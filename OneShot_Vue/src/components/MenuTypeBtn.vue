@@ -3,6 +3,7 @@
 		v-model="typeSelection"
 		selected-class="text-deep-purple-accent-4"
 		mandatory
+		class="mb-3"
 	>
 		<template v-for="menuType in types">
 			<v-chip>{{ menuType }}</v-chip>
