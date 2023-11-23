@@ -42,15 +42,12 @@ public class OrderRestController {
     @PostMapping("/create")
     @ApiOperation(value = "주문서 생성")
     public ResponseEntity<?> createOrder(HttpSession session, @RequestParam String brandId) {
-//        Object userObject = session.getAttribute("loginUser");
-//        if (userObject == null || userObject == "") {
-//            return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
-//        }
-        // TODO: login한 유저 받아오기
+        Object userObject = session.getAttribute("loginUser");
+        if (userObject == null || userObject == "") {
+            return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+        }
 
-        // 테스트용 유저
-        User user = new User();
-        user.setUserId(1);
+        User user = (User) userObject;
 
         String orderCode = null;
         try {
