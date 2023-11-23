@@ -41,13 +41,16 @@ public class OrderRestController {
 
     @PostMapping("/create")
     @ApiOperation(value = "주문서 생성")
-    public ResponseEntity<?> createOrder(HttpSession session, @RequestParam String brandId) {
-        Object userObject = session.getAttribute("loginUser");
-        if (userObject == null || userObject == "") {
-            return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
-        }
+    public ResponseEntity<?> createOrder(HttpSession session, @RequestParam String brandId, @RequestParam int userId) {
+//        Object userObject = session.getAttribute("loginUser");
+//        if (userObject == null || userObject == "") {
+//            return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+//        }
+//
+//        User user = (User) userObject;
 
-        User user = (User) userObject;
+        User user = new User();
+        user.setUserId(userId);
 
         String orderCode = null;
         try {
