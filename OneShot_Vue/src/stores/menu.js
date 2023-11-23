@@ -2,12 +2,14 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
 export const useMenuStore = defineStore("menu", () => {
+  // orderView
+  const order = ref({});
+  const orderDetails = ref([]);
+
   const type = ref("");
   const temperature = ref("");
   const size = ref("");
-  const orderId = ref(-1);
   const amount = ref(1);
   const menuDetail = ref({});
-  const orderCode = ref("");
-	return { type, temperature, size, orderId, amount, menuDetail, orderCode };
+	return { type, temperature, size, amount, menuDetail, order, orderDetails };
 });
