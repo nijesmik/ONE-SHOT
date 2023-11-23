@@ -1,8 +1,20 @@
 <template>
 	<v-container>
-		<v-card max-width="600" class="mx-auto p-3 mt-3">
-			<span class="title">주문 내역</span>
-			<v-list lines="two" v-for="orderDetail in orderDetails">
+		<div class="url">
+			<ShareUrl />
+		</div>
+		<v-card max-width="600" class="mx-auto list">
+			<v-row class="justify-space-between">
+				<v-col class="v-col-auto">
+
+					<div class="title">주문 내역</div>
+					<div class="ml-1 total">총 주문 금액 : {{ total }}원</div>
+				</v-col>
+				<v-col class="v-col-auto d-flex align-end" v-if="isManager">
+					<OrderComplete />
+				</v-col>
+			</v-row>
+			<v-list lines="two" v-for="orderDetail in menuStore.orderDetails">
 				<Result :order-detail="orderDetail" />
 			</v-list>
 		</v-card>
@@ -10,37 +22,51 @@
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>
-import axios from "axios";
-import { useUrlStore } from "@/stores/url";
+import { ref, computed } from "vue";
 import { useMenuStore } from "@/stores/menu";
-import { useRoute } from "vue-router";
-import { ref } from "vue";
 import Result from "@/components/Result.vue";
+import ShareUrl from "@/components/ShareUrl.vue";
+import OrderComplete from "@/components/OrderComplete.vue";
 
-const URL = useUrlStore();
 const menuStore = useMenuStore();
-const route = useRoute();
-const order = ref({});
-const orderDetails = ref([]);
-
-axios
-	.get(`${URL.API.ORDER}?orderCode=${route.params.orderCode}`)
-	.then((res) => {
-		order.value = res.data.order;
-		menuStore.orderId = order.value.orderId;
-		orderDetails.value = res.data.orderDetail;
-		console.log(orderDetails.value);
+const total = computed(() => {
+	let sum = 0;
+	menuStore.orderDetails.forEach((orderDetail) => {
+		sum += orderDetail.unitPrice * orderDetail.amount;
 	});
+	return sum;
+});
+
+const test = () => {
+	if (menuStore.order.service > 0) {
+		return false;
+	}
+	const userId = sessionStorage.getItem("token");
+	const orderUserId = menuStore.order.userId;
+	if (userId == orderUserId) {
+		return true;
+	}
+}
+const isManager = ref(test());
+console.log(menuStore.order);
 </script>
 <!-- --------------------------------------------------------------- -->
 <style scoped>
 .list {
-	width: auto;
-	margin: 0 auto;
+	padding: 2%;
 }
 
 .title {
 	font-size: 2.5rem;
 	font-weight: 500;
+}
+
+.url {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.total {
+	font-size: 1.1rem;
 }
 </style>

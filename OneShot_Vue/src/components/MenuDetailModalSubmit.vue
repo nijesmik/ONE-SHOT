@@ -40,17 +40,14 @@ const order = () => {
 	}
 	axios
 		.post(URL.API.ORDER_DETAIL_CREATE, {
-			orderId: menuStore.orderId,
+			orderId: menuStore.order.orderId,
 			menuDetailId: menuStore.menuDetail.menuDetailId,
 			name: name.value,
 			amount: menuStore.amount,
 		})
 		.then((res) => {
-			localStorage.setItem(`oneshot-order-${menuStore.orderId}`, name.value);
-			router.push({
-				name: "order-result",
-				params: { orderCode: route.params.orderCode },
-			});
+			localStorage.setItem(`oneshot-order-${menuStore.order.orderId}`, name.value);
+			location.reload();
 		})
 		.catch((err) => {
 			alert("주문 실패");

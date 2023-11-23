@@ -1,11 +1,11 @@
 <template>
 	<v-col :cols="cols">
-		<v-card hover link class="brand">
+		<v-card hover link class="brand" :disabled="brand.service == 0">
 			<v-img :src="brand.logo" aspect-ratio="1" contain></v-img>
 			<div class="brand-name">{{ brand.brandName }}</div>
 		</v-card>
 
-		<v-dialog v-model="dialog" activator="parent" width="auto">
+		<v-dialog v-if="brand.service === 1" v-model="dialog" activator="parent" width="auto">
 			<v-card>
 				<v-card-text> {{ brand.brandName }}에서 주문하시겠습니까? </v-card-text>
 				<v-card-actions>
@@ -31,9 +31,7 @@ import { defineProps, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useUrlStore } from "@/stores/url";
 import axios from "axios";
-import { useMenuStore } from "@/stores/menu";
 
-const menuStore = useMenuStore();
 const URL = useUrlStore();
 const router = useRouter();
 
@@ -54,7 +52,7 @@ const cols = ref(calcCols());
 const createOrder = (brand) => {
 	axios
 		.post(
-			`${URL.API.ORDER_CREATE}?brandId=${brand.brandId}&userId=${menuStore.userId}`
+			`${URL.API.ORDER_CREATE}?brandId=${brand.brandId}&userId=${sessionStorage.getItem("token")}`
 		)
 		.then((res) => {
 			router.push({ name: "order-menu", params: { orderCode: res.data } });

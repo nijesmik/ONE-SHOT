@@ -31,6 +31,7 @@
 				prepend-inner-icon="mdi-lock-outline"
 				variant="outlined"
 				@click:append-inner="visible = !visible"
+				@keyup.enter="login(email, password); dialog = true"
 				v-model="password"
 			></v-text-field>
 
@@ -109,8 +110,7 @@ const login = (email, password) => {
 		})
 		.then((res) => {
 			islogin.value = true;
-			localStorage.setItem("token", res.data.userId);
-			menuStore.userId = res.data.userId;
+			sessionStorage.setItem("token", res.data.userId);
 			text.value = `${res.data.nickname}님 환영합니다!`;
 		})
 		.catch((err) => {

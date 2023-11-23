@@ -1,10 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import OrderMenuView from '@/views/OrderMenuView.vue'
-import OrderBrandView from '@/views/OrderBrandView.vue'
-import OrderResultView from '@/views/OrderResultView.vue'
+
 import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SignupView.vue'
+
+import BrandView from '@/views/BrandView.vue'
+
+import OrderView from '@/views/OrderView.vue'
+import OrderMenuView from '@/views/OrderMenuView.vue'
+import OrderResultView from '@/views/OrderResultView.vue'
+import OrderErrorView from '@/views/OrderErrorView.vue'
+import OrderTestView from '@/views/OrderTestView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,17 +33,34 @@ const router = createRouter({
     {
       path: '/order',
       name: 'order-brand',
-      component: OrderBrandView
+      component: BrandView
     },
     {
       path: '/order/:orderCode',
-      name: 'order-menu',
-      component: OrderMenuView
-    },
-    {
-      path: '/order/:orderCode',
-      name: 'order-result',
-      component: OrderResultView
+      name: 'order',
+      component: OrderView,
+      children: [
+        {
+          path: '',
+          name: 'order-test',
+          component: OrderTestView
+        },
+        {
+          path: '',
+          name: 'order-menu',
+          component: OrderMenuView
+        },
+        {
+          path: '',
+          name: 'order-result',
+          component: OrderResultView
+        },
+        {
+          path: '',
+          name: 'order-error',
+          component: OrderErrorView
+        },
+      ]
     },
   ]
 })

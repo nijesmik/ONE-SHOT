@@ -1,35 +1,33 @@
 <template>
-	<div class="input-group mb-3 url">
-		<input
-			type="text"
-			class="form-control"
-			:placeholder="shareUrl"
-			aria-label="Recipient's username"
-			aria-describedby="button-addon2"
-		/>
-		<button
-			@click.prevent="clipboard"
-			class="btn btn-outline-secondary"
-			type="button"
-			id="button-addon2"
-		>
-			Copy
-		</button>
-	</div>
+	<v-text-field :model-value="shareUrl" label="URL" variant="outlined" readonly>
+		<template v-slot:append-inner>
+			<v-btn color="primary" variant="tonal" @click="clipboard"> Copy </v-btn>
+
+			<v-snackbar v-model="snackbar" timeout="2000">
+				복사 완료!
+
+				<template v-slot:actions>
+					<v-btn color="blue" variant="text" @click="snackbar = false">
+						Close
+					</v-btn>
+				</template>
+			</v-snackbar>
+		</template>
+	</v-text-field>
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>
 import { ref } from "vue";
 import { useUrlStore } from "@/stores/url";
-import { useMenuStore } from "@/stores/menu";
+import { useRoute } from "vue-router";
 
-const menuStore = useMenuStore();
+const route = useRoute();
 const URL = useUrlStore();
-const shareUrl = ref(`${URL.DOMAIN}/order/${menuStore.orderCode}`);
-
+const shareUrl = ref(`${URL.DOMAIN}/order/${route.params.orderCode}`);
+const snackbar = ref(false);
 const clipboard = () => {
-	navigator.clipboard.writeText(props.url).then(() => {
-		alert("URL이 복사되었습니다.");
+	navigator.clipboard.writeText(shareUrl.value).then(() => {
+		snackbar.value = true;
 	});
 };
 </script>
