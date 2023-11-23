@@ -34,17 +34,35 @@
 				v-model="password"
 			></v-text-field>
 
-			<v-btn
-				block
-				class="mb-8 mt-8"
-				color="blue"
-				size="large"
-				variant="tonal"
-				@click.prevent="login(email, password)"
-			>
-				Log In
-			</v-btn>
-
+			<div>
+				<v-btn
+					block
+					class="mb-8 mt-8"
+					color="blue"
+					size="large"
+					variant="tonal"
+					@click.prevent="login(email, password)"
+				>
+					Log In
+				</v-btn>
+				<v-dialog v-model="dialog" activator="parent" width="auto">
+					<v-card>
+						<v-card-text>
+							{{ text }}
+						</v-card-text>
+						<v-card-actions>
+							<v-spacer></v-spacer>
+							<v-btn
+								color="primary-darken-1"
+								variant="text"
+								@click.prevent="dialog = false"
+							>
+								확인
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
+			</div>
 			<v-card-text class="text-center">
 				<router-link
 					:to="{ name: 'signup' }"
@@ -60,16 +78,28 @@
 <!-- --------------------------------------------------------------- -->
 <script setup>
 import axios from "axios";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useUrlStore } from "@/stores/url";
 import { useRouter } from "vue-router";
+import { useMenuStore } from "@/stores/menu";
 
 const URL = useUrlStore();
+const menuStore = useMenuStore();
 const email = ref("");
 const password = ref("");
 const router = useRouter();
 
+const dialog = ref(false);
 const visible = ref(false);
+const islogin = ref(false);
+
+watch(dialog, (state) => {
+	if (!state && islogin.value) {
+		router.push({ name: "home" });
+	}
+});
+
+const text = ref("");
 
 const login = (email, password) => {
 	axios
@@ -78,13 +108,13 @@ const login = (email, password) => {
 			password: password,
 		})
 		.then((res) => {
-			alert("로그인 성공");
-			console.log(res.data);
+			islogin.value = true;
 			localStorage.setItem("token", res.data.userId);
-			router.push({ name: "home" });
+			menuStore.userId = res.data.userId;
+			text.value = `${res.data.nickname}님 환영합니다!`;
 		})
 		.catch((err) => {
-			alert("로그인 실패");
+			text.value = "로그인 실패";
 		});
 };
 </script>
