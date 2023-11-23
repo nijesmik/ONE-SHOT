@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `brand` ( -- 브랜드 정보를 저장하는 테이�
   `brand_name` VARCHAR(255) NOT NULL UNIQUE COMMENT '브랜드 이름',
   `logo` VARCHAR(255) NOT NULL COMMENT '브랜드 로고',
   `brand_url` VARCHAR(255) COMMENT '브랜드 공식 홈페이지 url',
+  `service` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '서비스 여부 : 0 서비스 안함 | 1 서비스 함',
   `created_time`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '브랜드 row 생성 시각',
   `updated_time`  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '마지막 브랜드 row 수정 시각'
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;

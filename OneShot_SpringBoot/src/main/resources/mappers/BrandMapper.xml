@@ -8,6 +8,7 @@
         <result column="brand_name" property="brandName"/>
         <result column="logo" property="logo"/>
         <result column="brand_url" property="brandUrl"/>
+        <result column="service" property="service"/>
         <result column="created_time" property="createdTime"/>
         <result column="updated_time" property="updatedTime"/>
     </resultMap>
@@ -32,9 +33,19 @@
     <update id="update" parameterMap="Brand">
         UPDATE brand
         SET
-        brand_name = #{brandName},
-        logo = #{logo},
-        brand_url = #{brandUrl}
+        brand_id = brand_id
+        <if test="brandName != null">
+            , brand_name = #{brandName}
+        </if>
+        <if test="logo != null">
+            , logo = #{logo}
+        </if>
+        <if test="brandUrl != null">
+            , brand_url = #{brandUrl}
+        </if>
+        <if test="service != 0">
+            , service = #{service}
+        </if>
         WHERE brand_id = #{brandId}
     </update>
 
