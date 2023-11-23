@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int updateOrder(int orderId, Order order) {
         order.setOrderId(orderId);
-        return orderDao.update(orderId);
+        return orderDao.update(order);
     }
 
     @Override
