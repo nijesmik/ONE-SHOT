@@ -8,5 +8,6 @@ export const useMenuStore = defineStore("menu", () => {
   const orderId = ref(-1);
   const amount = ref(1);
   const menuDetail = ref({});
-	return { type, temperature, size, orderId, amount, menuDetail };
+  const orderCode = ref("");
+	return { type, temperature, size, orderId, amount, menuDetail, orderCode };
 });
