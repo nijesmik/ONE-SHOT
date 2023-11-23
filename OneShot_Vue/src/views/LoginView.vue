@@ -31,6 +31,7 @@
 				prepend-inner-icon="mdi-lock-outline"
 				variant="outlined"
 				@click:append-inner="visible = !visible"
+				@keyup.enter="login(email, password); dialog = true"
 				v-model="password"
 			></v-text-field>
 
