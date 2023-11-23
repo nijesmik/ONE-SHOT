@@ -8,6 +8,7 @@ public class Brand {
     private String brandName;
     private String logo;
     private String brandUrl;
+    private int service;
     private String createdTime;
     private String updatedTime;
 
@@ -46,6 +47,14 @@ public class Brand {
         this.brandUrl = brandUrl;
     }
 
+    public int getService() {
+        return service;
+    }
+
+    public void setService(int service) {
+        this.service = service;
+    }
+
     public String getCreatedTime() {
         return createdTime;
     }
@@ -65,7 +74,7 @@ public class Brand {
     @Override
     public String toString() {
         return "Brand [brandId=" + brandId + ", brandName=" + brandName + ", logo=" + logo + ", brandUrl=" + brandUrl
-                + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+                + ", service=" + service + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
     }
 
 }
