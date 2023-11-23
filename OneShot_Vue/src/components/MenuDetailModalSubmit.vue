@@ -3,6 +3,7 @@
 		<v-text-field
 			:rules="rules"
 			label="Name"
+			variant="outlined"
 			v-model="name"
 			class="mb-3"
 		></v-text-field>
@@ -45,6 +46,7 @@ const order = () => {
 			amount: menuStore.amount,
 		})
 		.then((res) => {
+			localStorage.setItem(`oneshot-order-${menuStore.orderId}`, name.value);
 			router.push({
 				name: "order-result",
 				params: { orderCode: route.params.orderCode },
