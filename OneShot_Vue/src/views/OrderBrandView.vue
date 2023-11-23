@@ -1,8 +1,9 @@
 <template>
 	<v-container>
+		<div class="title">주문하실 브랜드를 선택해주세요</div>
 		<v-row>
 			<template v-for="brand in brands">
-				<Brand :brand="brand" @click="selectBrand(brand)" />
+				<Brand :brand="brand" />
 			</template>
 		</v-row>
 	</v-container>
@@ -10,29 +11,28 @@
 <!-- --------------------------------------------------------------- -->
 <script setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
 import axios from "axios";
 import Brand from "@/components/Brand.vue";
 import { useUrlStore } from "@/stores/url";
 
 const URL = useUrlStore();
 const brands = ref([]);
-const router = useRouter();
 
 axios.get(URL.API.BRAND).then((res) => {
 	brands.value = res.data;
 });
-
-const selectBrand = (brand) => {
-	const isConfirmed = confirm(`${brand.brandName}에서 주문하시겠습니까?`);
-	if (isConfirmed) {
-		axios
-			.post(`${URL.API.ORDER_CREATE}?brandId=${brand.brandId}`)
-			.then((res) => {
-				router.push({ name: "order-menu", params: { orderCode: res.data } });
-			});
-	}
-};
 </script>
 <!-- --------------------------------------------------------------- -->
-<style scoped></style>
+<style scoped>
+.title {
+	font-size: 2.5rem;
+	font-weight: bold;
+	margin: 2rem 0 2rem 0;
+}
+
+@media screen and (max-width: 600px) {
+	.title {
+		font-size: 1.7rem;
+	}
+}
+</style>
