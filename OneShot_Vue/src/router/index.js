@@ -10,7 +10,6 @@ import OrderView from '@/views/OrderView.vue'
 import OrderMenuView from '@/views/OrderMenuView.vue'
 import OrderResultView from '@/views/OrderResultView.vue'
 import OrderErrorView from '@/views/OrderErrorView.vue'
-import OrderTestView from '@/views/OrderTestView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,18 +41,13 @@ const router = createRouter({
       children: [
         {
           path: '',
-          name: 'order-test',
-          component: OrderTestView
+          name: 'order-result',
+          component: OrderResultView
         },
         {
           path: '',
           name: 'order-menu',
           component: OrderMenuView
-        },
-        {
-          path: '',
-          name: 'order-result',
-          component: OrderResultView
         },
         {
           path: '',

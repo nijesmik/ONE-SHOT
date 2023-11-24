@@ -46,7 +46,7 @@ const order = () => {
 			amount: menuStore.amount,
 		})
 		.then((res) => {
-			localStorage.setItem(`oneshot-order-${menuStore.order.orderId}`, name.value);
+			localStorage.setItem(`oneshot-order-${res.data}`, name.value);
 			location.reload();
 		})
 		.catch((err) => {
