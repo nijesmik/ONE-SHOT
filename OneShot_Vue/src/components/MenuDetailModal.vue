@@ -30,6 +30,7 @@
 		</v-chip-group>
 	</v-card-text>
 	<MenuDetailModalAmount />
+	<MenuDetailModalPrice />
 	<MenuDetailModalSubmit />
 </template>
 <!-- --------------------------------------------------------------- -->
@@ -40,6 +41,7 @@ import { useUrlStore } from "@/stores/url";
 import { ref, defineProps, watch } from "vue";
 import MenuDetailModalAmount from "@/components/MenuDetailModalAmount.vue";
 import MenuDetailModalSubmit from "@/components/MenuDetailModalSubmit.vue";
+import MenuDetailModalPrice from "@/components/MenuDetailModalPrice.vue";
 
 const props = defineProps({
 	menu: Object,
