@@ -1,6 +1,6 @@
 <template>
 	<v-card-text>
-		<span class="subheading">Select amount</span>
+		<span class="subheading">수량</span>
 		<v-row class="align-center mt-n1 mb-n1">
 			<v-col cols="auto">
 				<v-btn
