@@ -40,14 +40,14 @@ import axios from "axios";
 import { useUrlStore } from "@/stores/url";
 import { useMenuStore } from "@/stores/menu";
 
-const menuStore = useMenuStore();
-const orderId = menuStore.order.orderId;
-const name = localStorage.getItem(`oneshot-order-${orderId}`);
-
-const URL = useUrlStore();
 const props = defineProps({
 	orderDetail: Object,
 });
+const menuStore = useMenuStore();
+const orderDetailId = props.orderDetail.orderDetailId;
+const name = localStorage.getItem(`oneshot-order-${orderDetailId}`);
+
+const URL = useUrlStore();
 const content = ref(
 	`${props.orderDetail.menuName} / ${props.orderDetail.temperature} / ${props.orderDetail.sizeName} / ${props.orderDetail.amount}잔`
 );
@@ -66,7 +66,7 @@ const deleteOrder = () => {
 	axios
 		.delete(`${URL.API.ORDER_DETAIL_DELETE}/${props.orderDetail.orderDetailId}`)
 		.then((res) => {
-			localStorage.removeItem(`oneshot-order-${orderId}`);
+			localStorage.removeItem(`oneshot-order-${orderDetailId}`);
 			location.reload();
 		});
 };

@@ -1,5 +1,5 @@
 <template>
-	<v-container>
+	<v-container v-if="menuStore.order.orderId > 0">
 		<div class="url">
 			<ShareUrl />
 		</div>
@@ -10,8 +10,9 @@
 					<div class="title">주문 내역</div>
 					<div class="ml-1 total">총 {{ total.amount }}잔 / {{ total.price }}원</div>
 				</v-col>
-				<v-col class="v-col-auto d-flex align-end" v-if="isManager">
-					<OrderComplete />
+				<v-col class="v-col-auto d-flex align-end" v-if="isService">
+					<OrderAddBtn />
+					<OrderCompleteBtn v-if="isManager"/>
 				</v-col>
 			</v-row>
 			<v-list lines="two" v-for="orderDetail in menuStore.orderDetails">
@@ -26,7 +27,8 @@ import { ref, computed } from "vue";
 import { useMenuStore } from "@/stores/menu";
 import Result from "@/components/Result.vue";
 import ShareUrl from "@/components/ShareUrl.vue";
-import OrderComplete from "@/components/OrderComplete.vue";
+import OrderAddBtn from "@/components/OrderAddBtn.vue";
+import OrderCompleteBtn from "@/components/OrderCompleteBtn.vue";
 
 const menuStore = useMenuStore();
 const total = computed(() => {
@@ -39,17 +41,14 @@ const total = computed(() => {
 	return {price:price, amount:amount};
 });
 
-const test = () => {
-	if (menuStore.order.service > 0) {
-		return false;
-	}
+const isManager = computed(() => {
 	const userId = sessionStorage.getItem("token");
 	const orderUserId = menuStore.order.userId;
 	if (userId == orderUserId) {
 		return true;
 	}
-}
-const isManager = ref(test());
+})
+const isService = computed(() => (menuStore.order.service == 0));
 </script>
 <!-- --------------------------------------------------------------- -->
 <style scoped>
