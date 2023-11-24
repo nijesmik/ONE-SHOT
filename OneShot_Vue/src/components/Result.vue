@@ -48,8 +48,9 @@ const orderDetailId = props.orderDetail.orderDetailId;
 const name = localStorage.getItem(`oneshot-order-${orderDetailId}`);
 
 const URL = useUrlStore();
+const price = ref(props.orderDetail.unitPrice * props.orderDetail.amount);
 const content = ref(
-	`${props.orderDetail.menuName} / ${props.orderDetail.temperature} / ${props.orderDetail.sizeName} / ${props.orderDetail.amount}잔`
+	`${props.orderDetail.menuName} / ${props.orderDetail.temperature} / ${props.orderDetail.sizeName} / ${props.orderDetail.amount}잔 / ${price.value}원`
 );
 
 const test = () => {
