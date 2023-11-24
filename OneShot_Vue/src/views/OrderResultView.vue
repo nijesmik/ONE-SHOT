@@ -8,7 +8,7 @@
 				<v-col class="v-col-auto">
 
 					<div class="title">주문 내역</div>
-					<div class="ml-1 total">총 주문 금액 : {{ total }}원</div>
+					<div class="ml-1 total">총 {{ total.am }}잔 / {{ total.price }}원</div>
 				</v-col>
 				<v-col class="v-col-auto d-flex align-end" v-if="isManager">
 					<OrderComplete />
@@ -30,11 +30,13 @@ import OrderComplete from "@/components/OrderComplete.vue";
 
 const menuStore = useMenuStore();
 const total = computed(() => {
-	let sum = 0;
+	let price = 0;
+	let amount = 0;
 	menuStore.orderDetails.forEach((orderDetail) => {
-		sum += orderDetail.unitPrice * orderDetail.amount;
+		price += orderDetail.unitPrice * orderDetail.amount;
+		amount += orderDetail.amount;
 	});
-	return sum;
+	return {price:price, amount:amount};
 });
 
 const test = () => {
