@@ -1,13 +1,13 @@
 <template>
 	<div class="background">
-		<div class="title">ONE-SHOT</div>
+		<div id="home-title">ONE-SHOT</div>
 		<div class="menu">
 			<template v-if="!login">
 				<router-link :to="{ name: 'login' }">로그인</router-link>
 				<router-link :to="{ name: 'signup' }">회원가입</router-link>
 			</template>
 			<template v-else>
-				<a id="logout" href="" @click.prevent="logout">로그아웃</a>
+				<Logout />
 				<router-link :to="{ name: 'order-brand' }">주문 하기</router-link>
 			</template>
 		</div>
@@ -15,6 +15,7 @@
 </template>
 <!-- --------------------------------------------------------------- -->
 <script setup>
+import Logout from "@/components/Logout.vue";
 import { ref } from 'vue';
 const islogin = () => {
 	if (sessionStorage.getItem("token")) {
@@ -23,15 +24,9 @@ const islogin = () => {
 	return false;
 };
 const login = ref(islogin());
-
-const logout = () => {
-	sessionStorage.removeItem("token");
-	location.reload();
-};
-
 </script>
 <!-- --------------------------------------------------------------- -->
-<style scoped>
+<style>
 .background {
 	background-image: url("/src/assets/coffee.jpg");
 	background-size: cover;
@@ -47,7 +42,7 @@ const logout = () => {
 	flex-direction: column;
 }
 
-.title {
+#home-title {
 	font-size: 11vw;
 	font-weight: 900;
 	color: white;
