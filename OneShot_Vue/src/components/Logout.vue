@@ -31,4 +31,21 @@ watch(snackbar, (snackbar) => {
 });
 </script>
 <!-- --------------------------------------------------------------- -->
-<style scoped></style>
+<style scoped>
+a {
+	margin: 0 1rem;
+	font-size: 4vw;
+	text-decoration: none;
+	color: white;
+}
+
+a:hover {
+	color: black;
+}
+
+@media screen and (min-width: 770px) {
+	a {
+		font-size: 2.5vw;
+	}
+}
+</style>

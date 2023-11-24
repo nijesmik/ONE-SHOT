@@ -26,7 +26,7 @@ const islogin = () => {
 const login = ref(islogin());
 </script>
 <!-- --------------------------------------------------------------- -->
-<style>
+<style scoped>
 .background {
 	background-image: url("/src/assets/coffee.jpg");
 	background-size: cover;
@@ -40,6 +40,7 @@ const login = ref(islogin());
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	text-shadow: 2px 2px 6px gray;
 }
 
 #home-title {
