@@ -31,9 +31,9 @@ public class OrderDetailRestController {
     public ResponseEntity<?> createOrderDetail(@RequestBody OrderDetail orderDetail) {
         int result = orderDetailService.createOrderDetail(orderDetail);
         if (result == 0) {
-            return new ResponseEntity<Integer>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<Integer>(result, HttpStatus.CREATED);
+        return new ResponseEntity<Integer>(orderDetail.getOrderDetailId(), HttpStatus.CREATED);
     }
 
     @GetMapping("/{orderDetailId}")
