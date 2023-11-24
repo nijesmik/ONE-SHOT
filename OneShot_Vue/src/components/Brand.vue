@@ -42,6 +42,9 @@ const props = defineProps({
 });
 
 const calcCols = () => {
+	if (window.innerWidth > 1200) {
+		return 2;
+	}
 	if (window.innerWidth < 600) {
 		return 4;
 	}
