@@ -61,17 +61,33 @@
 				variant="outlined"
 				v-model="nickname"
 			></v-text-field>
-
-			<v-btn
-				block
-				class="mb-8 mt-8"
-				color="blue"
-				size="large"
-				variant="tonal"
-				@click.prevent="signup"
-			>
-				Submit
-			</v-btn>
+			<div>
+				<v-btn
+					block
+					class="mb-8 mt-8"
+					color="blue"
+					size="large"
+					variant="tonal"
+					@click.prevent="signup"
+				>
+					Submit
+				</v-btn>
+				<v-dialog v-model="dialog" activator="parent" width="auto">
+					<v-card>
+						<v-card-text> {{ modalText }} </v-card-text>
+						<v-card-actions>
+							<v-spacer></v-spacer>
+							<v-btn
+								color="primary-darken-1"
+								variant="text"
+								@click.prevent="closeModal"
+							>
+								확인
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
+			</div>
 		</v-card>
 	</v-container>
 </template>
@@ -92,9 +108,27 @@ const nickname = ref("");
 const visible = ref(false);
 const visible2 = ref(false);
 
+const dialog = ref(false);
+const modalText = ref("");
+
+const success = ref(false);
+const closeModal = () => {
+	if (success.value) {
+		router.push({ name: "login" });
+	}
+};
+
 const signup = () => {
+	if (password.value.length <= 0) {
+		modalText.value = "비밀번호를 입력해주세요.";
+		return;
+	}
 	if (password.value !== password2.value) {
-		alert("비밀번호가 일치하지 않습니다.");
+		modalText.value = "비밀번호가 일치하지 않습니다.";
+		return;
+	}
+	if (nickname.value === "" || nickname.value === null) {
+		modalText.value = "닉네임을 입력해주세요.";
 		return;
 	}
 	axios
@@ -105,13 +139,12 @@ const signup = () => {
 		})
 		.then((res) => {
 			if (res.data === 1) {
-				alert("회원가입 성공");
-				router.push({ name: "login" });
+				success.value = true;
+				modalText.value = "회원가입 완료!";
 			}
 		})
 		.catch((err) => {
-			alert("회원가입 실패");
-			console.log(err);
+			modalText.value = "회원가입 실패";
 		});
 };
 </script>

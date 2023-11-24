@@ -3,7 +3,7 @@
 	<br />
 	<v-card-title>{{ menu.menuName }}</v-card-title>
 	<v-card-text>
-		<span class="subheading">Select temperature</span>
+		<span class="subheading">Ice & Hot</span>
 
 		<v-chip-group
 			v-model="temperatureSelection"
@@ -17,7 +17,7 @@
 	</v-card-text>
 
 	<v-card-text>
-		<span class="subheading">Select size</span>
+		<span class="subheading">Size</span>
 
 		<v-chip-group
 			v-model="sizeSelection"
