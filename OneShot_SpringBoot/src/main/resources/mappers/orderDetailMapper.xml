@@ -17,7 +17,7 @@
     
     <parameterMap type="OrderDetail" id="OrderDetail"/>
 
-    <insert id="createOrderDetail" parameterType="OrderDetail">
+    <insert id="createOrderDetail" parameterType="OrderDetail" useGeneratedKeys="true" keyProperty="orderDetailId">
         INSERT INTO order_detail
         (order_id, menu_detail_id, name, amount)
         VALUES (#{orderId}, #{menuDetailId}, #{name}, #{amount})

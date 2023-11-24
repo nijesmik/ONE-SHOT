@@ -1,6 +1,7 @@
 package oneshot.model.dao;
 
 import java.util.List;
+
 import oneshot.model.dto.OrderDetail;
 
 public interface OrderDetailDao {
