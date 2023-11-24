@@ -8,7 +8,7 @@
 				<v-col class="v-col-auto">
 
 					<div class="title">주문 내역</div>
-					<div class="ml-1 total">총 {{ total.am }}잔 / {{ total.price }}원</div>
+					<div class="ml-1 total">총 {{ total.amount }}잔 / {{ total.price }}원</div>
 				</v-col>
 				<v-col class="v-col-auto d-flex align-end" v-if="isManager">
 					<OrderComplete />
@@ -50,7 +50,6 @@ const test = () => {
 	}
 }
 const isManager = ref(test());
-console.log(menuStore.order);
 </script>
 <!-- --------------------------------------------------------------- -->
 <style scoped>
